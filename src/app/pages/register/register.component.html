@@ -1,0 +1,308 @@
+<div
+  class="overflow-hidden register lg:min-h-[calc(100vh_-_100px)] flex items-center mt-20"
+>
+  <div
+    class="container mx-auto md:w-[95%] grid grid-cols-1 lg:grid-cols-2 px-3 rounded-3xl pt-8 bg-section py-8 my-6"
+  >
+    <div
+      class="image flex flex-col justify-cente items-center"
+      data-aos="fade-right"
+      data-aos-delay="100"
+      data-aos-duration="800"
+    >
+      <h3 class="text-[35px] font-semibold text-second w-[80%] text-center">
+        Discover the latest <span class="text-main">trends</span>, express your
+        unique style
+      </h3>
+      <img src="/images/Shopping-cuate.svg" class="w-full lg:w-[65%]" />
+    </div>
+    <div
+      class="form-register px-5 overflow-auto"
+      data-aos="fade-left"
+      data-aos-delay="200"
+      data-aos-duration="1000"
+    >
+      <div class="heading mb-5 bg-ma">
+        <h1 class="text-[35px] font-bold text-main">Register</h1>
+        <p class="text-pargraph">Create an Account to acess all features</p>
+      </div>
+      <form [formGroup]="formInputs" (ngSubmit)="handelsignUp()">
+        <div class="flex justify-between flex-wrap">
+          <div class="input-group w-full md:w-[49%] mb-6">
+            <p-floatlabel variant="in" class="w-full">
+              <input
+                pInputText
+                id="in_label"
+                autocomplete="off"
+                class="w-full pt-[16px]"
+                formControlName="name"
+              />
+              <label for="in_label">User Name</label>
+            </p-floatlabel>
+
+            @if(formInputs.get("name")?.touched&&formInputs.get("name")?.invalid
+            ){
+            <div
+              class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+              role="alert"
+            >
+              <span class="sr-only">Error</span>
+              <div>
+                <ul class="list-disc list-inside">
+                  @if(formInputs.get("name")?.getError("required")){
+
+                  <li class="mb-1 fade">
+                    <span class="font-medium">Username is required.</span>
+                  </li>
+                  } @if(formInputs.get("name")?.getError("maxlength")){
+
+                  <li class="mb-1 fade">
+                    <span class="font-medium"
+                      >Username must not exceed 12 characters.</span
+                    >
+                  </li>
+                  } @if(formInputs.get("name")?.getError("minlength")){
+                  <li class="mb-1 fade">
+                    <span class="font-medium"
+                      >Username must be at least 3 characters.</span
+                    >
+                  </li>
+                  } @if(formInputs.get("name")?.getError("pattern")){
+                  <li class="mb-1 fade">
+                    <span class="font-medium"
+                      >Username must: Start with a letter Contain only letters,
+                      numbers, dots (.) or underscores (_) Not end with a dot or
+                      underscore.</span
+                    >
+                  </li>
+                  }
+                </ul>
+              </div>
+            </div>
+
+            }
+          </div>
+          <div class="input-group w-full md:w-[49%] mb-6">
+            <p-floatlabel variant="in" class="w-full">
+              <input
+                pInputText
+                id="in_label"
+                autocomplete="off"
+                class="w-full pt-[16px]"
+                formControlName="phone"
+              />
+              <label for="in_label">Phone</label>
+            </p-floatlabel>
+
+            @if(formInputs.get("phone")?.touched&&formInputs.get("phone")?.invalid
+            ){
+            <div
+              class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
+              role="alert"
+            >
+              <span class="sr-only">Error</span>
+              <div>
+                <ul class="list-disc list-inside">
+                  @if(formInputs.get("phone")?.getError("required")){
+
+                  <li class="mb-1 fade">
+                    <span class="font-medium">Phone is required.</span>
+                  </li>
+
+                  } @if(formInputs.get("phone")?.getError("pattern")){
+                  <li class="mxb-1 fade">
+                    <span class="font-medium"
+                      >Please enter a valid Egyptian phone number.</span
+                    >
+                  </li>
+                  }
+                </ul>
+              </div>
+            </div>
+
+            }
+          </div>
+        </div>
+        <div class="input-group mb-6 w-full">
+          <p-floatlabel variant="in" class="w-full">
+            <input
+              pInputText
+              id="in_label"
+              autocomplete="off"
+              class="w-full pt-[16px]"
+              formControlName="email"
+            />
+            <label for="in_label">Email</label>
+          </p-floatlabel>
+
+          @if(formInputs.get("email")?.touched&&formInputs.get("email")?.invalid){
+          <div
+            class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
+            role="alert"
+          >
+            <span class="sr-only">Error</span>
+            <div>
+              <ul class="list-disc list-inside">
+                @if(formInputs.get("email")?.getError("required")){
+
+                <li class="mb-1 fade">
+                  <span class="font-medium">Email is required.</span>
+                </li>
+
+                } @if(formInputs.get("email")?.getError("email")){
+
+                <li class="mb-1 fade">
+                  <span class="font-medium"
+                    >Please enter a valid email address.</span
+                  >
+                </li>
+
+                }
+              </ul>
+            </div>
+          </div>
+
+          }
+        </div>
+        <div class="flex justify-between flex-wrap">
+          <div class="input-group w-full md:w-[49%] mb-6">
+            <p-floatlabel variant="in" class="w-full">
+              <input
+                pInputText
+                id="in_label"
+                autocomplete="off"
+                class="w-full pt-[16px]"
+                formControlName="password"
+                type="password"
+              />
+              <label for="in_label">Password</label>
+            </p-floatlabel>
+
+            @if(formInputs.get("password")?.touched&&formInputs.get("password")?.invalid){
+            <div
+              class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+              role="alert"
+            >
+              <span class="sr-only">Error</span>
+              <div>
+                <ul class="list-disc list-inside">
+                  @if(formInputs.get("password")?.getError("required")){
+
+                  <li class="mb-1 fade">
+                    <span class="font-medium">Password is required.</span>
+                  </li>
+                  } @if(formInputs.get("password")?.getError("pattern")){
+
+                  <li class="mb-1 fade">
+                    <span class="font-medium"
+                      >Password must: Be at least 8 characters long Include at
+                      least one uppercase letter (A–Z) Include at least one
+                      lowercase letter (a–z) Include at least one number (0–9)
+                      Include at least one special character (e.g. !, #, $, %,
+                      etc.)
+                    </span>
+                  </li>
+
+                  }
+                </ul>
+              </div>
+            </div>
+
+            }
+          </div>
+          <div class="input-group w-full md:w-[49%] mb-6">
+            <p-floatlabel variant="in" class="w-full">
+              <input
+                pInputText
+                id="in_label"
+                autocomplete="off"
+                class="w-full pt-[16px]"
+                formControlName="rePassword"
+                type="password"
+              />
+              <label for="in_label">Confirm Password</label>
+            </p-floatlabel>
+
+            @if(formInputs.get("rePassword")?.touched&&formInputs.get("rePassword")?.invalid){
+            <div
+              class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+              role="alert"
+            >
+              <span class="sr-only">Error</span>
+
+              <div>
+                <ul class="list-disc list-inside">
+                  @if(formInputs.getError("passwordMatchResult")){
+                  <li>
+                    <span class="font-medium"
+                      >The password and confirm password fields must
+                      match.</span
+                    >
+                  </li>
+                  } @if(formInputs.get("rePassword")?.getError("required")){
+
+                  <li class="mb-1 fade">
+                    <span class="font-medium">Password is required.</span>
+                  </li>
+                  } @if(formInputs.get("rePassword")?.getError("pattern")){
+
+                  <li class="mb-1 fade">
+                    <span class="font-medium"
+                      >Password must: Be at least 8 characters long Include at
+                      least one uppercase letter (A–Z) Include at least one
+                      lowercase letter (a–z) Include at least one number (0–9)
+                      Include at least one special character (e.g. !, #, $, %,
+                      etc.)
+                    </span>
+                  </li>
+
+                  }
+                </ul>
+              </div>
+            </div>
+
+            }
+            @if(formInputs.getError("passwordMatchResult")&&formInputs.get("password")?.dirty){
+            <div
+              class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+              role="alert"
+            >
+              <span class="font-medium"
+                >The password and confirm password fields must match.</span
+              >
+            </div>
+
+            }
+          </div>
+        </div>
+        <button
+          [disabled]="formInputs.invalid || showSpinner"
+          class="block w-full bg-main text-white rounded-[10px] py-2 transition hover:bg-second cursor-pointer disabled:bg-[#B980B6] disabled:cursor-not-allowed"
+        >
+          <span>REGISTER</span>
+          @if(showSpinner){
+          <span class="ms-1.5"
+            ><i class="fa-solid fa-spinner fa-spin"></i
+          ></span>
+
+          }
+        </button>
+      </form>
+      <div class="flex items-center gap-4 my-4 w-[70%] mx-auto">
+        <hr class="flex-grow border-t border-gray-300" />
+        <span class="text-gray-500 text-sm">OR</span>
+        <hr class="flex-grow border-t border-gray-300" />
+      </div>
+      <div class="text-center">
+        <p class="text-sm text-gray-600">
+          Already have an account?
+          <a
+            routerLink="/login"
+            class="text-main font-semibold hover:underline transition hover:text-second"
+            >Login here</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

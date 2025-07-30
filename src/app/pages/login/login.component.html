@@ -1,0 +1,140 @@
+<div
+  class="overflow-hidden login lg:h-[calc(100vh_-_100px)] flex items-center mt-20"
+>
+  <div
+    class="container mx-auto md:w-[95%] grid grid-cols-1 lg:grid-cols-2 rounded-3xl pt-8 px-3 bg-section py-8 my-6"
+  >
+    <div
+      class="flex flex-col items-center justify-center image"
+      data-aos="fade-right"
+      data-aos-delay="100"
+      data-aos-duration="800"
+    >
+      <h3 class="text-[35px] font-semibold text-second w-[80%] text-center">
+        Be one of the cool<span class="text-main"> crowd </span> , shop smart ,
+        shop now
+      </h3>
+      <img src="/images/Shopping bag-amico.svg" class="w-full lg:w-[65%]" />
+    </div>
+    <div
+      class="px-5 form-div"
+      data-aos="fade-left"
+      data-aos-delay="200"
+      data-aos-duration="1000"
+    >
+      <div class="mb-5 heading">
+        <h1 class="text-[35px] font-bold text-main">Login</h1>
+        <p class="text-pargraph">Welcome back! Please login to continue</p>
+      </div>
+      <form [formGroup]="formObj" (ngSubmit)="handelLogin()">
+        <p-floatlabel variant="in" class="mb-4">
+          <input
+            pInputText
+            id="in_label"
+            type="email"
+            formControlName="email"
+            autocomplete="off"
+            class="w-full pt-[20px]"
+          />
+          <label for="in_label">Email</label>
+        </p-floatlabel>
+
+        @if(formObj.get("email")?.touched &&formObj.get("email")?.invalid ){
+        <div
+          class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+          role="alert"
+        >
+          <span class="sr-only">Error</span>
+          <div>
+            <ul class="list-disc list-inside">
+              @if(formObj.get("email")?.getError("required")){
+
+              <li class="mb-1 fade">
+                <span class="font-medium">Email is required.</span>
+              </li>
+              } @if(formObj.get("email")?.getError("email")){
+
+              <li class="mb-1 fade">
+                <span class="font-medium">Please enter a valid email </span>
+              </li>
+              }
+            </ul>
+          </div>
+        </div>
+
+        }
+
+        <p-floatlabel variant="in" class="mb-4">
+          <input
+            pInputText
+            id="in_label"
+            type="password"
+            formControlName="password"
+            autocomplete="off"
+            class="w-full pt-[20px]"
+          />
+          <label for="in_label">Password</label>
+        </p-floatlabel>
+        <div class="text-end mb-4">
+          <a
+            routerLink="/forgotPassword"
+            class="text-sm text-main hover:underline transition hover:text-second"
+          >
+            Forgot your password?
+          </a>
+        </div>
+        @if(formObj.get("password")?.touched&&formObj.get("password")?.invalid
+        ){
+        <div
+          class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
+          role="alert"
+        >
+          <span class="sr-only">Error</span>
+          <div>
+            <ul class="list-disc list-inside">
+              @if(formObj.get("password")?.getError("required")){
+
+              <li class="mb-1 fade">
+                <span class="font-medium">Password is required.</span>
+              </li>
+
+              }
+            </ul>
+          </div>
+        </div>
+
+        }
+
+        <button
+          [disabled]="formObj.invalid || showSpinner"
+          class="block md:w-[70%] bg-main mx-auto text-white rounded-[10px] py-2 transition hover:bg-second cursor-pointer disabled:bg-[#B980B6] disabled:cursor-not-allowed"
+        >
+          <span>LOGIN</span>
+          @if(showSpinner){
+          <span class="ms-1.5"
+            ><i class="fa-solid fa-spinner fa-spin"></i
+          ></span>
+
+          }
+        </button>
+      </form>
+      <div class="flex items-center gap-4 my-4 w-[70%] mx-auto">
+        <hr class="flex-grow border-t border-gray-300" />
+        <span class="text-sm text-gray-500">OR</span>
+        <hr class="flex-grow border-t border-gray-300" />
+      </div>
+
+      <div class="text-center">
+        <p class="text-sm text-gray-600">
+          Don't have an account?
+          <a
+            routerLink="/register"
+            class="text-main font-semibold hover:underline transition hover:text-second"
+          >
+            Register here
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

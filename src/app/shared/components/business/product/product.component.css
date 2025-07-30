@@ -1,0 +1,21 @@
+img{
+transition: 0.3s transform;
+    object-fit: cover;
+}
+button.badge{
+    transition: background-color  0.3s ease ; 
+   transform: translateX(50px);
+}
+ .card:hover button.badge{
+     transform: translateX(0);
+ }
+.card:hover figure img{
+    transform: scale(1.05);
+}
+.fade {
+  transition: opacity 1s ease-in-out;
+  opacity: 1;
+}
+.hidden {
+  opacity: 0;
+}

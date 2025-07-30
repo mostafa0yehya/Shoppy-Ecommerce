@@ -1,0 +1,108 @@
+@if(whishListBag) {
+<section class="whislist">
+  <div class="container mx-auto px-3 bg-white">
+    <div class="navigation my-4 py-2">
+      <a
+        [routerLink]="['/home']"
+        class="text-gray-400 text-[14px] font-extrabold hover:text-gray-900 transition-colors"
+        >Home
+      </a>
+      <span class="text-gray-400"> ></span>
+
+      <span class="text-gray-800 text-[14px] font-medium"> Whish List</span>
+    </div>
+
+    <div class="title flex justify-between items-center line pb-3">
+      <h1 class="text-[20px] md:text-2xl text-main">Whish List</h1>
+    </div>
+
+    <div class="details flex my-4 gap-14 flex-wrap">
+      <div
+        class="w-full lg:w-[80%] overflow-auto md:block bg-section rounded-2xl cart-holder border-gray-400 mx-auto"
+        data-aos="fade-right"
+        data-aos-delay="100"
+        data-aos-duration="800"
+      >
+        <div class="mobile-cart-items py-6">
+          @if(whishListBag.count>0){ @for (item of whishListBag.data; track
+          item._id) {
+          <div
+            class="product mb-2 flex justify-between gap-2.5 hover:bg-white py-3 px-2 md:px-5 flex-wrap flex-col md:flex-row transition-colors"
+          >
+            <div class="product-info flex md:justify-between">
+              <img
+                [src]="item.imageCover"
+                class="w-[100px]"
+                alt="cart item  image"
+              />
+              <div class="title-product ps-4 flex-[1]">
+                <span class="text-[15px] text-gray-500 block">{{
+                  item.category.name
+                }}</span>
+                <h3 class="text-[20px] mb-4 text-second">
+                  {{ item.title.split(" ", 2).join(" ") }}
+                </h3>
+                <div
+                  class="rating flex items-center bg-white rounded w-fit px-2 mb-4"
+                >
+                  <span class="text-[16px] text-main font-medium block">{{
+                    item.ratingsAverage
+                  }}</span>
+                  <span class="text-third block align-text-bottom">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="m12 17.275l-4.15 2.5q-.275.175-.575.15t-.525-.2t-.35-.437t-.05-.588l1.1-4.725L3.775 10.8q-.25-.225-.312-.513t.037-.562t.3-.45t.55-.225l4.85-.425l1.875-4.45q.125-.3.388-.45t.537-.15t.537.15t.388.45l1.875 4.45l4.85.425q.35.05.55.225t.3.45t.038.563t-.313.512l-3.675 3.175l1.1 4.725q.075.325-.05.588t-.35.437t-.525.2t-.575-.15z"
+                      />
+                    </svg>
+                  </span>
+                </div>
+                <span class="text-[17px] font-semibold text-gray-700"
+                  >{{ item.price }} EGP</span
+                >
+              </div>
+            </div>
+
+            <div
+              class="actions flex justify-end md:flex-col items-center gap-4 py-2"
+            >
+              <app-cart-button [itemID]="item._id"></app-cart-button>
+              <a
+                (click)="removeWhishListItem(item._id, $event)"
+                class="text-red-800 border items-center flex justify-center border-red-800 transition-colors size-[35px] p-1.5 text-[20px] rounded hover:text-white hover:bg-red-600 hover:border-red-600"
+              >
+                <span class="hidden spiner-icon"
+                  ><i class="fa-solid fa-spinner fa-spin"></i
+                ></span>
+                <span class="trash-icon flex items-center justify-center"
+                  ><i class="fa-solid fa-trash-can"></i
+                ></span>
+              </a>
+            </div>
+          </div>
+
+          }} @else {
+          <div
+            class="empty flex flex-col justify-center items-center content-center h-full"
+          >
+            <span class="text-[150px] text-second"
+              ><i class="fa-regular fa-heart"></i
+            ></span>
+            <p class="text-[20px]">Your WhishList is empty !!</p>
+            <a
+              class="rounded bg-main hover:bg-second transition-colors p-2 text-white mt-6"
+              >Shop Now</a
+            >
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+}

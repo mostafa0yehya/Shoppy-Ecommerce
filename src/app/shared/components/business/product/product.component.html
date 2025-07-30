@@ -1,0 +1,78 @@
+<div
+  class="card relative border-1 p-1 border-gray-200 cursor-pointer h-full bg-white rounded"
+>
+  <figure class="mb-1.5 relative overflow-hidden">
+    <img class="rounded" [src]="product.imageCover" alt="Watch" />
+
+    <div
+      class="absolute justify-between h-full items-end flex flex-col pe-2 py-2 w-full top-0"
+    >
+      <app-wishlis-button [productId]="product.id"></app-wishlis-button>
+
+      <app-cart-button [itemID]="product.id"></app-cart-button>
+    </div>
+  </figure>
+  <div class="card-body p-3">
+    <h5 class="card-title mb-1 text-main font-bold text-[18px] line-clamp-1">
+      @if (product.title.split(" ").length>20) {
+      {{ product.title.split(" ", 20).join(" ") }}... } @else {
+      {{ product.title }}
+      }
+    </h5>
+    <div
+      class="price flex items-center justify-between border-t-1 border-gray-300 py-2"
+    >
+      <p class="mb-0 font-bold text-[16px] me-2 flex items-center">
+        <span class="me-1">
+          {{
+            product.priceAfterDiscount
+              ? product.priceAfterDiscount
+              : product.price
+          }}
+        </span>
+        <span class="font-normal text-[14px]">EGP</span>
+      </p>
+
+      @if(product.priceAfterDiscount){
+
+      <p class="line-through -ms-5 text-gray-500 text-[14px] mb-0">
+        {{ product.price }}
+      </p>
+      }
+      <div class="rating flex items-center bg-white rounded w-fit px-2 py-1">
+        <span class="text-[16px] text-main font-medium block">{{
+          product.ratingsAverage
+        }}</span>
+        <span class="text-third block align-text-bottom">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="m12 17.275l-4.15 2.5q-.275.175-.575.15t-.525-.2t-.35-.437t-.05-.588l1.1-4.725L3.775 10.8q-.25-.225-.312-.513t.037-.562t.3-.45t.55-.225l4.85-.425l1.875-4.45q.125-.3.388-.45t.537-.15t.537.15t.388.45l1.875 4.45l4.85.425q.35.05.55.225t.3.45t.038.563t-.313.512l-3.675 3.175l1.1 4.725q.075.325-.05.588t-.35.437t-.525.2t-.575-.15z"
+            />
+          </svg>
+        </span>
+        <span class="text-gray-400">({{ product.ratingsQuantity }})</span>
+      </div>
+    </div>
+
+    @if(product.priceAfterDiscount){
+
+    <div
+      class="absolute left-2 top-4 px-2 rounded align-middle border border-green-500 block text-[18px] bg-green-50 text-green-700 sale font-semibold"
+    >
+      - {{ this.productService.productDiscount(product) }}%
+    </div>
+    }
+
+    <a
+      [routerLink]="['/productDetails', product.id]"
+      class="my-2.5 md:w-[50%] px-2.5 flex items-center justify-center py-1.5 rounded bg-second hover:bg-third transition-colors text-white"
+      >Details</a
+    >
+  </div>
+</div>

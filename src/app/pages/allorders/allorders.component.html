@@ -1,0 +1,166 @@
+<section class="min-h-[80vh] mb-6 mt-20">
+  <div class="container mx-auto px-3">
+    <div class="navigation my-4 py-2">
+      <a
+        [routerLink]="['/home']"
+        class="text-gray-400 text-[14px] font-extrabold hover:text-gray-900 transition-colors"
+        >Home
+      </a>
+      <span class="text-gray-400"> ></span>
+
+      <span class="text-gray-800 text-[14px] font-medium"> MyOrders</span>
+    </div>
+    <div class="title flex items-center gap-2 mb-5">
+      <div class="icon text-second">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="currentColor"
+            d="M5.616 20q-.672 0-1.144-.472T4 18.385V7.486q0-.292.093-.55t.28-.475l1.558-1.87q.217-.293.543-.442T7.173 4h9.616q.372 0 .708.149t.553.441l1.577 1.91q.187.217.28.485q.093.267.093.56v10.84q0 .67-.472 1.143q-.472.472-1.143.472zM5.38 6.808H18.6L17.27 5.21q-.097-.096-.222-.153T16.788 5H7.192q-.134 0-.26.058t-.22.154zm9.619 1H9v5.47q0 .46.379.7t.783.028l1.838-.91l1.839.91q.403.211.782-.028q.379-.24.379-.7z"
+          />
+        </svg>
+      </div>
+      <div class="content">
+        <h1 class="text-main font-bold text-[35px]">My Orders</h1>
+        <p class="text-gray-500 text-[14px] -mt-1">
+          Track and manage your order history
+        </p>
+      </div>
+    </div>
+    <div
+      class="orders-summary grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-5"
+    >
+      <div class="box border-gray-300 border rounded p-4">
+        <h3 class="text-gray-700 text-[25px]">Total Orders</h3>
+        <span class="text-[30px] font-bold text-main block">{{
+          userOrders?.length
+        }}</span>
+      </div>
+      <div class="box border-gray-300 border rounded p-4">
+        <h3 class="text-gray-700 text-[25px]">Paid Orders</h3>
+        <span class="text-[30px] font-bold text-second block">{{
+          getNumberOfPaidOrders()
+        }}</span>
+      </div>
+      <div class="box border-gray-300 border rounded p-4">
+        <h3 class="text-gray-700 text-[25px]">Delivered Orders</h3>
+        <span class="text-[30px] font-bold text-third block">{{
+          getNumberOfDeliveredOrders()
+        }}</span>
+      </div>
+    </div>
+    <div class="orders">
+      @for (order of userOrders; track order.id;let i=$index) {
+
+      <p-accordion value="0">
+        <p-accordion-panel
+          value="i"
+          class="border-gray-300 border my-4 rounded"
+        >
+          <p-accordion-header>
+            <div class="flex flex-col gap-2">
+              <h4>
+                <span class="text-main capitalize">order #</span>
+                {{ order.id }}
+              </h4>
+              <span class="text-[13.5px] text-gray-400 block">{{
+                order.user.name
+              }}</span>
+              <div
+                class="flex items-center gap-4 text-[14px] payment-info flex-wrap"
+              >
+                <span class="text-gray-600"
+                  ><i class="fa-regular fa-credit-card"></i
+                ></span>
+                <span>{{ order.paymentMethodType }}</span>
+                @if(order.isPaid){
+                <span
+                  class="bg-green-600 rounded-[15px] py-1 px-2 text-[11px] text-white"
+                  >Paid</span
+                >
+                } @else{
+                <span
+                  class="bg-red-500 text-white rounded-[40px] py-1 px-2 text-[11px]"
+                  >Not Paid</span
+                >
+                } @if(order.isDelivered){
+                <span
+                  class="bg-green-600 text-white rounded-[40px] py-1 px-2 text-[11px]"
+                  >Delivered</span
+                >
+                } @else{
+                <span
+                  class="bg-amber-400 text-white rounded-[40px] py-1 px-2 text-[11px]"
+                  >Not Delivered</span
+                >
+                }
+                <div>
+                  <span class="me-1"
+                    ><i class="fa-regular fa-calendar"></i
+                  ></span>
+                  <span class="text-gray-400">{{
+                    order.createdAt | date : "MMM d, y - hh:mm a"
+                  }}</span>
+                </div>
+              </div>
+              <span
+                class="absolute top-1/2 -translate-1/2 right-[10%] md:right-[5%] rounded-xl text-[13.5px] bg-white border border-gray-400 p-1 text-main"
+                >{{ order.totalOrderPrice }} $</span
+              >
+            </div>
+          </p-accordion-header>
+          <p-accordion-content>
+            <div class="border-t-[1px] border-gray-200 py-4">
+              <h3 class="flex gap-2 mb-4">
+                <span
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M7.502 19q-1.04 0-1.771-.73Q5 17.543 5 16.5H3.379q-.213 0-.356-.144t-.144-.357t.144-.356t.356-.143h1.877q.271-.667.875-1.084Q6.735 14 7.5 14t1.37.416q.603.417.874 1.084h4.618L16.558 6H6.212q-.213 0-.357-.144t-.143-.357t.143-.356T6.212 5h10.577q.384 0 .626.308q.243.308.156.686L16.998 8.5h1.271q.384 0 .727.172q.344.171.566.474l1.797 2.398q.218.292.283.609q.066.316.01.664l-.598 3.037q-.056.292-.284.469t-.518.177h-.483q0 1.039-.728 1.77t-1.77.73t-1.771-.73q-.73-.728-.73-1.77H10q0 1.039-.728 1.77t-1.77.73m8.385-5.75h4.651l.177-.89l-2.138-2.86h-1.818zm-1.283 1.248l.13-.58q.13-.58.33-1.42q.113-.46.198-.85q.084-.39.134-.646l.13-.58q.13-.58.33-1.42t.33-1.42l.13-.58L16.558 6l-2.197 9.5zm-12.315-1.5q-.205 0-.343-.144t-.138-.356t.143-.357t.357-.143h3.48q.213 0 .357.144t.143.357t-.143.356t-.357.143zm2-3.496q-.213 0-.357-.144t-.144-.357t.144-.356t.356-.143h4.5q.213 0 .357.144q.143.144.143.357t-.143.356t-.357.143zM7.5 18q.617 0 1.059-.441Q9 17.117 9 16.5t-.441-1.059T7.5 15t-1.059.441Q6 15.883 6 16.5t.441 1.059Q6.883 18 7.5 18m9.77 0q.617 0 1.058-.441q.441-.442.441-1.059t-.441-1.059T17.269 15t-1.058.441q-.442.442-.442 1.059t.441 1.059q.442.441 1.06.441"
+                    /></svg
+                ></span>
+                <span>Order Item ({{ i + 1 }})</span>
+              </h3>
+              @for (item of order.cartItems; track item._id) {
+              <div
+                class="product flex justify-between bg-gray-100 rounded p-4 mb-4"
+              >
+                <div class="flex gap-2 items-cente">
+                  <img
+                    [src]="item.product.imageCover"
+                    class="size-[60px] object-cover"
+                    alt=""
+                  />
+                  <div class="info flex flex-col gap-2">
+                    <h4>{{ item.product.title }}</h4>
+                    <p class="text-gray-400 text-[14px] mb-0">
+                      Brand : {{ item.product.brand.name }}
+                    </p>
+                    <p class="text-gray-400 text-[14px] mb-0">
+                      Quantity : {{ item.count }}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="price">
+                  <span class="font-semibold">Total</span> : {{ item.price }}$
+                </div>
+              </div>
+              }
+            </div>
+          </p-accordion-content>
+        </p-accordion-panel>
+      </p-accordion>
+      }
+    </div>
+  </div>
+</section>

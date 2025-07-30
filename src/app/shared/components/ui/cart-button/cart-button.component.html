@@ -1,0 +1,11 @@
+<button
+  class="cursor-pointer size-[35px] p-1 text-[20px] rounded bg-white transition ease-in text-main border-1 border-main hover:bg-third hover:border-third hover:text-white flex justify-center items-center"
+  (click)="addToCart()"
+>
+  @if(showSpin){
+  <span> <i class="fa-solid fa-spinner fa-spin"></i> </span>
+  } @else {
+  <span><i class="fa-solid fa-cart-plus"></i></span>
+
+  }
+</button>

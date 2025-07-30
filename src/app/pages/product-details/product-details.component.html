@@ -1,0 +1,233 @@
+@if(productData){
+<div class="product-details">
+  <div class="container mx-auto px-3 mt-20">
+    <div class="title my-4 py-2">
+      <a
+        [routerLink]="['/home']"
+        class="text-gray-400 text-[16px] font-extrabold hover:text-gray-900 transition-colors"
+        >Home
+      </a>
+      <span class="text-gray-400"> ></span>
+      <a
+        class="text-gray-400 text-[16px] font-bold hover:text-gray-900 transition-colors"
+      >
+        Category
+      </a>
+      <span class="text-gray-400"> > </span>
+      <span class="text-gray-400 font-semibold">{{
+        productData.category.name
+      }}</span>
+      <span class="text-gray-400"> > </span>
+
+      <span class="text-main font-medium">{{
+        productData.title.split(" ", 4).join(" ")
+      }}</span>
+    </div>
+
+    <div class="product-card grid grid-cols-12 my-10">
+      <div class="col-span-12 md:col-span-5 flex gap-3">
+        <!-- Vertical Swiper for thumbnails -->
+        <div class="hidden lg:w-1/4 lg:block">
+          <swiper-container class="mySwiper2" init="false" #swiper2>
+            @for (img of productData.images; track $index) {
+            <swiper-slide>
+              <img
+                [src]="img"
+                class="w-full h-full object-cover rounded border-2 border-gray-400 transition-all"
+              />
+            </swiper-slide>
+            }
+          </swiper-container>
+        </div>
+        <!-- Main Swiper -->
+        <div class="lg:w-3/4 w-full relative">
+          <button
+            (click)="swipePrev()"
+            class="custom-prev absolute left-2 top-1/2 cursor-pointer -translate-y-1/2 z-10 bg-white hover:text-white text-main hover:bg-second rounded shadow py-1 px-1.5"
+          >
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <button
+            (click)="swipeNext()"
+            class="custom-next absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white hover:text-white text-main hover:bg-second transition cursor-pointer py-1 px-1.5 rounded shadow"
+          >
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+          <swiper-container
+            #swiperRef
+            class="mySwiper h-[400px]"
+            thumbs-swiper=".mySwiper2"
+            init="false"
+          >
+            @for (img of productData.images; track $index) {
+            <swiper-slide>
+              <img [src]="img" class="w-full object-contain h-full" />
+            </swiper-slide>
+            }
+          </swiper-container>
+        </div>
+      </div>
+
+      <div class="col-span-12 product md:col-span-7 ps-6">
+        <div class="my-2 relative flex items-center justify-between">
+          <span
+            class="bg-red-600 text-white px-1.5 py-0.5 text-[13px] rounded block"
+            >Non-Returnable</span
+          >
+          <app-wishlis-button [productId]="productData.id"></app-wishlis-button>
+        </div>
+        <div class="title border-b-1 border-gray-300 pb-3">
+          <h2 class="text-2xl text-second font-semibold md:w-[75%] mb-2">
+            {{ productData.title }}
+          </h2>
+          <p class="text-gray-700 text-[15px]">
+            Brand: {{ productData.brand.name }}
+          </p>
+        </div>
+        <div class="price flex items-center my-3">
+          <p class="mb-0 font-extrabold text-[20px] me-2 flex items-center">
+            <span class="me-1">
+              {{
+                productData.priceAfterDiscount
+                  ? productData.priceAfterDiscount
+                  : productData.price
+              }}
+            </span>
+            <span class="font-normal text-[14px]">EGP</span>
+          </p>
+          @if(productData.priceAfterDiscount){
+          <p class="mb-0 line-through text-gray-500 text-[14px] me-1.5">
+            {{ productData.price }}
+          </p>
+          <p class="mb-0 text-green-700 font-bold text-[14px]">
+            {{ this.productService.productDiscount(productData) }}% Off
+          </p>
+          }
+          <div class="ms-3.5">
+            <app-features-of-product></app-features-of-product>
+          </div>
+        </div>
+        <div class="rating flex items-center">
+          <div class="rating-info flex me-2 text-[18px] text-gray-800">
+            <span class="block me-1.5"
+              >(+{{ productData.ratingsQuantity }})</span
+            >
+            <span class="block">{{ productData.ratingsAverage }}</span>
+          </div>
+          <div class="stars text-yellow-400 text-[16px] flex gap-1">
+            @for (star of stars; track $index) { @if(star=="full"){
+            <span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21z"
+                /></svg
+            ></span>
+            } @if(star=="half"){
+            <span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="m22 9.24l-7.19-.62L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.63-7.03zM12 15.4V6.1l1.71 4.04l4.38.38l-3.32 2.88l1 4.28z"
+                /></svg
+            ></span>
+            } @if(star=="empty"){
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="m22 9.24l-7.19-.62L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.63-7.03zM12 15.4l-3.76 2.27l1-4.28l-3.32-2.88l4.38-.38L12 6.1l1.71 4.04l4.38.38l-3.32 2.88l1 4.28z"
+                />
+              </svg>
+            </span>
+            } }
+          </div>
+        </div>
+        <div class="my-4 text-gray-500 font-semibold">
+          {{ productData.description }}
+        </div>
+        <button
+          (click)="addToCart(productData.id)"
+          class="bg-main w-1/2 flex text-white px-4 py-3 rounded cursor-pointer transition-colors hover:bg-[#8c2c86]"
+        >
+          @if(showspin){
+          <span><i class="fa-solid fa-spinner fa-spin"></i></span>
+          } @else {
+          <span class="block"> <i class="fa-solid fa-cart-plus"></i> </span>
+          }
+          <span class="block mx-auto">Add To Cart</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="relative slider-sale bg-section2 p-5 my-5">
+    <div class="max-w-3xl mx-auto px-4 title text-center mb-10">
+      <h2 class="text-3xl font-bold text-second mb-4 section-head capitalize">
+        Similar products
+      </h2>
+    </div>
+    <div class="container mx-auto px-3">
+      <div class="slider-holder relative">
+        <button
+          (click)="similarPrev()"
+          class="custom-prev absolute left-0 top-1/2 cursor-pointer -translate-y-1/2 z-10 text-white bg-main transition hover:bg-third rounded shadow p-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M14.71 15.88L10.83 12l3.88-3.88a.996.996 0 1 0-1.41-1.41L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0c.38-.39.39-1.03 0-1.42"
+            />
+          </svg>
+        </button>
+        <button
+          (click)="similarNext()"
+          class="custom-next absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-main text-white hover:bg-third transition cursor-pointer p-2 rounded shadow"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M8.59 16.59L13.17 12L8.59 7.41L10 6l6 6l-6 6z"
+            />
+          </svg>
+        </button>
+        <div>
+          <swiper-container class="mySwiper" #similarRef init="false">
+            @for (productItem of productList; track productItem.id) {
+            <swiper-slide>
+              <app-product [product]="productItem"></app-product>
+            </swiper-slide>
+
+            }
+          </swiper-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}

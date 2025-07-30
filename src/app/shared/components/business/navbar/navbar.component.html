@@ -1,0 +1,186 @@
+<nav
+  class="transition-all bg-white fixed top-0 left-0 right-0 z-50 shadow"
+  [class]="isBodyScroll ? 'py-4 ' : 'py-2'"
+>
+  <div class="mx-auto px-4">
+    <div class="flex justify-between items-center container mx-auto">
+      <!-- Logo -->
+      <div class="flex-shrink-0 flex items-center">
+        <a
+          routerLink="/home"
+          class="text-[30px] uppercase font-bold logo text-main"
+          >Shoopy</a
+        >
+      </div>
+      <div class="pages hidden md:flex gap-[30px] capitalize text-[18px]">
+        <a
+          routerLink="/home"
+          routerLinkActive="active"
+          class="text-main font-semibold hover:text-second relative p-1.5 rounded transition-colors"
+          >Home</a
+        >
+        <a
+          routerLink="/products"
+          routerLinkActive="active"
+          rou
+          class="text-main font-semibold hover:text-second relative p-1.5 rounded transition-colors"
+          >Shop</a
+        >
+        <a
+          class="text-main font-semibold hover:text-second relative p-1.5 rounded transition-colors"
+          >Brands</a
+        >
+
+        <a
+          routerLink="/allorders"
+          routerLinkActive="active"
+          class="text-main font-semibold hover:text-second relative p-1.5 rounded transition-colors"
+          >My Orders</a
+        >
+      </div>
+      <!-- Desktop Menu -->
+      <div class="items-center gap-2.5 hidden md:flex">
+        <div class="flex items-center gap-4">
+          @if(isLoggedIn){
+
+          <a
+            class="text-second p-0.5 transition hover:text-third rounded"
+            routerLink="/cart"
+          >
+            <p-overlaybadge [value]="numberOfCartItems">
+              <i class="pi pi-bell" style="font-size: 2rem"></i>
+            </p-overlaybadge>
+            <span class="text-2xl"> <i class="fas fa-shopping-cart"></i></span>
+          </a>
+          <a
+            class="text-second p-0.5 transition hover:text-third rounded"
+            routerLink="/favourites"
+          >
+            <span class="text-2xl"> <i class="fas fa-heart"></i></span>
+          </a>
+          <a
+            (click)="logOut()"
+            class="rounded p-2 bg-main text-white transition-colors hover:bg-second capitalize"
+          >
+            Logout
+            <span class="ms-1"
+              ><i class="fa-solid fa-right-from-bracket"></i></span
+          ></a>
+          } @else {
+          <a
+            routerLink="/login"
+            class="rounded p-2 bg-main text-white transition-colors hover:bg-[#8c2c86] capitalize"
+          >
+            Login
+          </a>
+          <a
+            routerLink="/register"
+            class="rounded p-2 bg-second text-white transition-colors hover:bg-pink-500 capitalize"
+          >
+            Register
+          </a>
+          }
+        </div>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden flex items-center">
+        <button
+          (click)="toggleMenu()"
+          class="inline-flex items-center justify-center p-2 rounded-md bg-main text-white hover:text-white hover:bg-second"
+          aria-expanded="false"
+          [attr.aria-expanded]="isOpen"
+        >
+          <span class="sr-only">Open main menu</span>
+
+          <!-- Hamburger icon -->
+          @if(!isOpen){
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"
+            />
+          </svg>
+          }
+
+          <!-- Close icon -->
+          @if(isOpen){
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"
+            />
+          </svg>
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Mobile Menu -->
+  <div
+    class="md:hidden transition-all duration-300 ease-in-out overflow-hidden"
+    [class]="isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'"
+  >
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col gap-2">
+      <a
+        routerLink="/home"
+        routerLinkActive="active"
+        class="text-main font-semibold hover:text-second relative p-1.5 rounded transition-colors hover:bg-gray-200"
+        >Home</a
+      >
+      <a
+        routerLink="/products"
+        routerLinkActive="active"
+        rou
+        class="text-main font-semibold hover:text-second relative p-1.5 rounded transition-colors hover:bg-gray-200"
+        >Shop</a
+      >
+      <a
+        class="text-main font-semibold hover:text-second relative p-1.5 rounded transition-colors hover:bg-gray-200"
+        >Brands</a
+      >
+
+      <a
+        routerLink="/allorders"
+        routerLinkActive="active"
+        class="text-main font-semibold hover:text-second relative p-1.5 rounded transition-colors hover:bg-gray-200"
+        >My Orders</a
+      >
+      @if(isLoggedIn){
+
+      <a
+        (click)="logOut()"
+        class="rounded p-2 bg-main text-white transition-colors hover:bg-second capitalize"
+      >
+        Logout
+        <span class="ms-1"><i class="fa-solid fa-right-from-bracket"></i></span
+      ></a>
+      } @else {
+      <div class="flex items-center gap-2">
+        <a
+          routerLink="/login"
+          class="rounded p-2 bg-main text-white transition-colors hover:bg-[#8c2c86] capitalize w-fit"
+        >
+          Login
+        </a>
+        <a
+          routerLink="/register"
+          class="rounded p-2 bg-second text-white transition-colors hover:bg-pink-500 capitalize w-fit"
+        >
+          Register
+        </a>
+      </div>
+      }
+    </div>
+  </div>
+</nav>

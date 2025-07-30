@@ -1,0 +1,159 @@
+<div
+  class="overflow-hidden register lg:min-h-[calc(100vh_-_100px)] flex items-center"
+>
+  <div
+    class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 px-3 rounded-3xl pt-8 bg-section py-8 my-6"
+  >
+    <div class="summary w-full p-4 rounded md:order-2">
+      <h3 class="text-main text-2xl line pb-4 mb-4">Order Summary</h3>
+      <div class="price flex justify-between items-center mb-4">
+        <span class="text-[17.5px] font-semibold text-gray-700">Total</span>
+        <span class="text-[16px]">{{ cart?.data?.totalCartPrice }} EGP</span>
+      </div>
+      <div class="price flex justify-between items-center mb-4">
+        <span class="text-[17.5px] font-semibold text-gray-700">Shipping</span>
+        <span class="text-[16px] text-green-700">Free</span>
+      </div>
+      <div class="price flex justify-between items-center mb-4">
+        <span class="text-[17.5px] font-semibold text-gray-700"
+          >Coupon Applied
+        </span>
+        <span class="text-[16px]">0.00EGP </span>
+      </div>
+
+      <div class="price flex justify-between items-center mb-4">
+        <span class="text-[17.5px] font-semibold text-gray-700"
+          >Estimated Delivery by
+        </span>
+        <span class="text-[16px]">{{ getDeliveryDate() }}</span>
+      </div>
+    </div>
+    <div class="form-register px-5 overflow-auto">
+      <div class="heading mb-5 bg-ma">
+        <h1 class="text-[35px] font-bold text-main">Billing Details</h1>
+      </div>
+      <form [formGroup]="shippingForm" (ngSubmit)="checkOut()">
+        <div class="input-group w-full mb-6">
+          <p-floatlabel variant="in" class="w-full">
+            <input
+              pInputText
+              id="in_label"
+              autocomplete="off"
+              class="w-full pt-[16px]"
+              formControlName="phone"
+            />
+            <label for="in_label">Phone</label>
+          </p-floatlabel>
+
+          @if(shippingForm.get("phone")?.touched&&shippingForm.get("phone")?.invalid
+          ){
+          <div
+            class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
+            role="alert"
+          >
+            <span class="sr-only">Error</span>
+            <div>
+              <ul class="list-disc list-inside">
+                @if(shippingForm.get("phone")?.getError("required")){
+
+                <li class="mb-1 fade">
+                  <span class="font-medium">Phone is required.</span>
+                </li>
+
+                } @if(shippingForm.get("phone")?.getError("pattern")){
+                <li class="mxb-1 fade">
+                  <span class="font-medium"
+                    >Please enter a valid Egyptian phone number.</span
+                  >
+                </li>
+                }
+              </ul>
+            </div>
+          </div>
+
+          }
+        </div>
+        <div class="input-group w-full mb-6">
+          <p-floatlabel variant="in" class="w-full">
+            <input
+              pInputText
+              id="in_label"
+              autocomplete="off"
+              class="w-full pt-[16px]"
+              formControlName="city"
+            />
+            <label for="in_label">City</label>
+          </p-floatlabel>
+
+          @if(shippingForm.get("city")?.touched&&shippingForm.get("city")?.invalid
+          ){
+          <div
+            class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
+            role="alert"
+          >
+            <span class="sr-only">Error</span>
+            <div>
+              <ul class="list-disc list-inside">
+                @if(shippingForm.get("phone")?.getError("required")){
+
+                <li class="mb-1 fade">
+                  <span class="font-medium">City is required.</span>
+                </li>
+
+                }
+              </ul>
+            </div>
+          </div>
+
+          }
+        </div>
+        <div class="input-group w-full mb-6">
+          <textarea
+            pTextarea
+            pSize="large"
+            placeholder="Adress"
+            rows="3"
+            formControlName="details"
+            class="w-full border border-[#cbd5e1] p-2 bg-white rounded-2xl transition outline-0 placeholder:text-gray-400 placeholder:bg-transparent focus:border-main focus:border-[2.5px] font-semibold text-gray-700"
+            style="resize: none"
+          ></textarea>
+
+          @if(shippingForm.get("details")?.touched&&shippingForm.get("details")?.invalid
+          ){
+          <div
+            class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
+            role="alert"
+          >
+            <span class="sr-only">Error</span>
+            <div>
+              <ul class="list-disc list-inside">
+                @if(shippingForm.get("details")?.getError("required")){
+
+                <li class="mb-1 fade">
+                  <span class="font-medium">Details is required.</span>
+                </li>
+
+                }
+              </ul>
+            </div>
+          </div>
+
+          }
+        </div>
+
+        <button
+          [disabled]="shippingForm.invalid || showSpinner"
+          class="block w-full bg-main text-white rounded-[10px] py-2 transition hover:bg-second cursor-pointer disabled:bg-[#B980B6] disabled:cursor-not-allowed"
+        >
+          <span>Place Order</span>
+          @if(showSpinner){
+          <span class="ms-1.5"
+            ><i class="fa-solid fa-spinner fa-spin"></i
+          ></span>
+
+          }
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

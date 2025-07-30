@@ -1,0 +1,145 @@
+<section class="main-slider h-screen mb-10">
+  <app-main-slider></app-main-slider>
+</section>
+
+<section class="categories-section my-10 py-10">
+  <div class="max-w-3xl mx-auto px-4 title text-center mb-10">
+    <h2 class="text-3xl font-bold text-second mb-4 section-head">
+      Our Categories
+    </h2>
+    <p class="text-gray-500 text-lg">
+      Discover a wide range of categories tailored to your needs. Whether you're
+      shopping for fashion, electronics, or home essentials — we’ve got you
+      covered.
+    </p>
+  </div>
+
+  <div class="container mx-auto px-3">
+    <div
+      class="categories grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-10"
+    >
+      @for (category of categories; track category._id; let i = $index) {
+      <div
+        data-aos="fade-up"
+        [attr.data-aos-delay]="i * 100"
+        data-aos-duration="800"
+      >
+        <div
+          [routerLink]="['/category', category._id]"
+          class="category-item relative h-[300px] rounded-4xl cursor-pointer"
+        >
+          <img
+            [src]="category.image"
+            alt="category.name"
+            class="w-full object-cover h-[250px] rounded-t-4xl"
+          />
+          <h2 class="text-center pt-2 text-main text-[20px]" data-aos="fade-in">
+            {{ category.name }}
+          </h2>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="sale-section my-10 py-10 bg-section2">
+  <div class="max-w-3xl mx-auto px-4 title text-center mb-10">
+    <h2 class="text-3xl font-bold text-second mb-4 section-head">
+      Hurry, It’s On Sale!
+    </h2>
+    <p class="text-gray-500 text-lg">
+      Don’t wait — these deals won’t last long. Shop trending items at
+      irresistible prices before they’re gone.
+    </p>
+  </div>
+
+  <div class="container mx-auto px-3">
+    <!--Render sale -->
+
+    <div class="relative py-3 slider-sale">
+      <button
+        (click)="swipePrev()"
+        class="custom-prev absolute left-0 top-1/2 cursor-pointer opacity-0 -translate-y-1/2 z-10 text-white bg-main transition hover:bg-third rounded shadow p-2"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="currentColor"
+            d="M14.71 15.88L10.83 12l3.88-3.88a.996.996 0 1 0-1.41-1.41L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0c.38-.39.39-1.03 0-1.42"
+          />
+        </svg>
+      </button>
+      <button
+        (click)="swipeNext()"
+        class="custom-next absolute right-0 top-1/2 opacity-0 -translate-y-1/2 z-10 bg-main text-white hover:bg-third transition cursor-pointer p-2 rounded shadow"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="currentColor"
+            d="M8.59 16.59L13.17 12L8.59 7.41L10 6l6 6l-6 6z"
+          />
+        </svg>
+      </button>
+      <swiper-container class="mySwiper" #swiperRef init="false">
+        @for (productItem of productList; track productItem.id) {
+        <swiper-slide>
+          <app-product [product]="productItem"></app-product>
+        </swiper-slide>
+
+        }
+      </swiper-container>
+    </div>
+    <!--Render sale -->
+  </div>
+</section>
+
+<section class="collections my-5 relative">
+  <div class="max-w-3xl mx-auto px-4 title text-center mb-10">
+    <h2 class="text-3xl font-bold text-second mb-4 section-head">
+      Shop by Collection
+    </h2>
+    <p class="text-gray-500 text-lg">
+      Explore curated categories tailored to your style and needs.
+    </p>
+  </div>
+  <div class="container px-3 mx-auto md:h-[110vh]">
+    <div
+      class="grid-items grid-cols-1 grid lg:grid-cols-4 lg:grid-rows-2 gap-8 h-full"
+    >
+      <div
+        class="grid-item-1 lg:col-span-2 lg:row-span-2 flex items-end justify-center pb-[20%] px-5 rounded"
+      >
+        <h2 class="text-white text-5xl">Summer Collection</h2>
+      </div>
+      <div
+        class="grid-item-2 lg:col-span-1 lg:row-span-1 flex items-end justify-center pb-[20%] px-5 rounded"
+      >
+        <h2 class="text-white text-5xl">Men's Collection</h2>
+      </div>
+      <div
+        class="grid-item-3 lg:col-span-1 lg:row-span-1 flex items-end justify-center pb-[20%] px-5 rounded"
+      >
+        <h2 class="text-white text-5xl">Women's Collection</h2>
+      </div>
+      <div
+        class="grid-item-4 lg:col-span-2 lg:row-span-1 flex items-end justify-center pb-[20%] px-5 rounded"
+      >
+        <h2 class="text-white text-5xl">Kids Collection</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <app-brand-slider></app-brand-slider>
+</section>
