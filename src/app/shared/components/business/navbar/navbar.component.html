@@ -1,11 +1,11 @@
 <nav
-  class="transition-all bg-white fixed top-0 left-0 right-0 z-50 shadow"
+  class="fixed top-0 left-0 right-0 z-50 transition-all bg-white shadow"
   [class]="isBodyScroll ? 'py-4 ' : 'py-2'"
 >
-  <div class="mx-auto px-4">
-    <div class="flex justify-between items-center container mx-auto">
+  <div class="px-4 mx-auto">
+    <div class="container flex items-center justify-between mx-auto">
       <!-- Logo -->
-      <div class="flex-shrink-0 flex items-center">
+      <div class="flex items-center flex-shrink-0">
         <a
           routerLink="/home"
           class="text-[30px] uppercase font-bold logo text-main"
@@ -27,6 +27,8 @@
           >Shop</a
         >
         <a
+          routerLink="/brands"
+          routerLinkActive="active"
           class="text-main font-semibold hover:text-second relative p-1.5 rounded transition-colors"
           >Brands</a
         >
@@ -60,7 +62,7 @@
           </a>
           <a
             (click)="logOut()"
-            class="rounded p-2 bg-main text-white transition-colors hover:bg-second capitalize"
+            class="p-2 text-white capitalize transition-colors rounded bg-main hover:bg-second"
           >
             Logout
             <span class="ms-1"
@@ -75,7 +77,7 @@
           </a>
           <a
             routerLink="/register"
-            class="rounded p-2 bg-second text-white transition-colors hover:bg-pink-500 capitalize"
+            class="p-2 text-white capitalize transition-colors rounded bg-second hover:bg-pink-500"
           >
             Register
           </a>
@@ -84,10 +86,10 @@
       </div>
 
       <!-- Mobile menu button -->
-      <div class="md:hidden flex items-center">
+      <div class="flex items-center md:hidden">
         <button
           (click)="toggleMenu()"
-          class="inline-flex items-center justify-center p-2 rounded-md bg-main text-white hover:text-white hover:bg-second"
+          class="inline-flex items-center justify-center p-2 text-white rounded-md bg-main hover:text-white hover:bg-second"
           aria-expanded="false"
           [attr.aria-expanded]="isOpen"
         >
@@ -128,10 +130,10 @@
   </div>
   <!-- Mobile Menu -->
   <div
-    class="md:hidden transition-all duration-300 ease-in-out overflow-hidden"
+    class="overflow-hidden transition-all duration-300 ease-in-out md:hidden"
     [class]="isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'"
   >
-    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col gap-2">
+    <div class="flex flex-col gap-2 px-2 pt-2 pb-3 space-y-1 sm:px-3">
       <a
         routerLink="/home"
         routerLinkActive="active"
@@ -160,7 +162,7 @@
 
       <a
         (click)="logOut()"
-        class="rounded p-2 bg-main text-white transition-colors hover:bg-second capitalize"
+        class="p-2 text-white capitalize transition-colors rounded bg-main hover:bg-second"
       >
         Logout
         <span class="ms-1"><i class="fa-solid fa-right-from-bracket"></i></span
@@ -175,7 +177,7 @@
         </a>
         <a
           routerLink="/register"
-          class="rounded p-2 bg-second text-white transition-colors hover:bg-pink-500 capitalize w-fit"
+          class="p-2 text-white capitalize transition-colors rounded bg-second hover:bg-pink-500 w-fit"
         >
           Register
         </a>

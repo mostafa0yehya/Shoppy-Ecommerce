@@ -5,4 +5,5 @@ export interface ProductsFilter {
   category?: string;
   page?: number;
   limit?: number;
+  brand?: string;
 }

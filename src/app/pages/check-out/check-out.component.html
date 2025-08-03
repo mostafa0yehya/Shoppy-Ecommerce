@@ -2,38 +2,38 @@
   class="overflow-hidden register lg:min-h-[calc(100vh_-_100px)] flex items-center"
 >
   <div
-    class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 px-3 rounded-3xl pt-8 bg-section py-8 my-6"
+    class="container grid grid-cols-1 px-3 py-8 pt-8 mx-auto my-6 md:grid-cols-2 lg:grid-cols-2 rounded-3xl bg-section"
   >
-    <div class="summary w-full p-4 rounded md:order-2">
-      <h3 class="text-main text-2xl line pb-4 mb-4">Order Summary</h3>
-      <div class="price flex justify-between items-center mb-4">
+    <div class="w-full p-4 rounded summary md:order-2">
+      <h3 class="pb-4 mb-4 text-2xl text-main line">Order Summary</h3>
+      <div class="flex items-center justify-between mb-4 price">
         <span class="text-[17.5px] font-semibold text-gray-700">Total</span>
         <span class="text-[16px]">{{ cart?.data?.totalCartPrice }} EGP</span>
       </div>
-      <div class="price flex justify-between items-center mb-4">
+      <div class="flex items-center justify-between mb-4 price">
         <span class="text-[17.5px] font-semibold text-gray-700">Shipping</span>
         <span class="text-[16px] text-green-700">Free</span>
       </div>
-      <div class="price flex justify-between items-center mb-4">
+      <div class="flex items-center justify-between mb-4 price">
         <span class="text-[17.5px] font-semibold text-gray-700"
           >Coupon Applied
         </span>
         <span class="text-[16px]">0.00EGP </span>
       </div>
 
-      <div class="price flex justify-between items-center mb-4">
+      <div class="flex items-center justify-between mb-4 price">
         <span class="text-[17.5px] font-semibold text-gray-700"
           >Estimated Delivery by
         </span>
         <span class="text-[16px]">{{ getDeliveryDate() }}</span>
       </div>
     </div>
-    <div class="form-register px-5 overflow-auto">
-      <div class="heading mb-5 bg-ma">
+    <div class="px-5 overflow-auto form-register">
+      <div class="mb-5 heading bg-ma">
         <h1 class="text-[35px] font-bold text-main">Billing Details</h1>
       </div>
       <form [formGroup]="shippingForm" (ngSubmit)="checkOut()">
-        <div class="input-group w-full mb-6">
+        <div class="w-full mb-6 input-group">
           <p-floatlabel variant="in" class="w-full">
             <input
               pInputText
@@ -48,7 +48,7 @@
           @if(shippingForm.get("phone")?.touched&&shippingForm.get("phone")?.invalid
           ){
           <div
-            class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
+            class="flex items-center p-4 mt-2 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
             role="alert"
           >
             <span class="sr-only">Error</span>
@@ -73,7 +73,7 @@
 
           }
         </div>
-        <div class="input-group w-full mb-6">
+        <div class="w-full mb-6 input-group">
           <p-floatlabel variant="in" class="w-full">
             <input
               pInputText
@@ -88,7 +88,7 @@
           @if(shippingForm.get("city")?.touched&&shippingForm.get("city")?.invalid
           ){
           <div
-            class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
+            class="flex items-center p-4 mt-2 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
             role="alert"
           >
             <span class="sr-only">Error</span>
@@ -107,7 +107,7 @@
 
           }
         </div>
-        <div class="input-group w-full mb-6">
+        <div class="w-full mb-6 input-group">
           <textarea
             pTextarea
             pSize="large"
@@ -121,7 +121,7 @@
           @if(shippingForm.get("details")?.touched&&shippingForm.get("details")?.invalid
           ){
           <div
-            class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
+            class="flex items-center p-4 mt-2 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
             role="alert"
           >
             <span class="sr-only">Error</span>

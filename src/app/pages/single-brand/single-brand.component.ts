@@ -1,38 +1,44 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { ProductService } from '../../core/services/product.service';
 import { ProductsFilter } from '../../shared/interfaces/products-filter';
-import { Product } from '../../shared/interfaces/product';
+import { Brand } from '../../shared/interfaces/whish-list-bag';
 import { ProductComponent } from '../../shared/components/business/product/product.component';
-import { Category } from '../../shared/interfaces/category';
+import { BrandsService } from '../../core/services/brands.service';
+import { Product } from '../../shared/interfaces/product';
 import { PaginatorModule } from 'primeng/paginator';
+import { ProductService } from '../../core/services/product.service';
 import { RouterLink } from '@angular/router';
+
 @Component({
-  selector: 'app-category',
+  selector: 'app-single-brand',
   imports: [ProductComponent, PaginatorModule, RouterLink],
-  templateUrl: './category.component.html',
-  styleUrl: './category.component.css',
+  templateUrl: './single-brand.component.html',
+  styleUrl: './single-brand.component.css',
 })
-export class CategoryComponent implements OnInit {
+export class SingleBrandComponent implements OnInit {
   @Input('id') id!: string;
   param!: ProductsFilter;
+  brandsService = inject(BrandsService);
   productService = inject(ProductService);
-  productsList: Product[] | null = null;
-  category: Category | null = null;
 
+  productsList: Product[] | null = null;
+  brand: Brand | null = null;
   //pagination parmas
   rows = 0;
   totalRecords = 0;
   first = 0;
+
   ngOnInit(): void {
-    this.param = { category: this.id, limit: 10 };
+    this.param = { brand: this.id, limit: 10 };
 
     this.getAllProducts();
   }
   getAllProducts() {
     this.productService.getAllProducts(this.param).subscribe({
       next: (res) => {
+        console.log(res);
+
         this.productsList = res.data;
-        if (this.productsList) this.category = this.productsList[0].category;
+        if (this.productsList) this.brand = this.productsList[0].brand;
         this.totalRecords = res.results;
         this.rows = res.metadata.limit;
       },

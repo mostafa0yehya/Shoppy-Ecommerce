@@ -1,7 +1,7 @@
 @if(whishListBag) {
 <section class="whislist">
-  <div class="container mx-auto px-3 bg-white">
-    <div class="navigation my-4 py-2">
+  <div class="container px-3 mx-auto bg-white">
+    <div class="py-2 my-4 navigation">
       <a
         [routerLink]="['/home']"
         class="text-gray-400 text-[14px] font-extrabold hover:text-gray-900 transition-colors"
@@ -12,24 +12,24 @@
       <span class="text-gray-800 text-[14px] font-medium"> Whish List</span>
     </div>
 
-    <div class="title flex justify-between items-center line pb-3">
+    <div class="flex items-center justify-between pb-3 title line">
       <h1 class="text-[20px] md:text-2xl text-main">Whish List</h1>
     </div>
 
-    <div class="details flex my-4 gap-14 flex-wrap">
+    <div class="flex flex-wrap my-4 details gap-14">
       <div
-        class="w-full lg:w-[80%] overflow-auto md:block bg-section rounded-2xl cart-holder border-gray-400 mx-auto"
+        class="w-full lg:w-[80%] overflow-auto md:block rounded cart-holder border-gray-400 mx-auto"
         data-aos="fade-right"
         data-aos-delay="100"
         data-aos-duration="800"
       >
-        <div class="mobile-cart-items py-6">
+        <div class="py-6 mobile-cart-items">
           @if(whishListBag.count>0){ @for (item of whishListBag.data; track
           item._id) {
           <div
             class="product mb-2 flex justify-between gap-2.5 hover:bg-white py-3 px-2 md:px-5 flex-wrap flex-col md:flex-row transition-colors"
           >
-            <div class="product-info flex md:justify-between">
+            <div class="flex product-info md:justify-between">
               <img
                 [src]="item.imageCover"
                 class="w-[100px]"
@@ -43,12 +43,12 @@
                   {{ item.title.split(" ", 2).join(" ") }}
                 </h3>
                 <div
-                  class="rating flex items-center bg-white rounded w-fit px-2 mb-4"
+                  class="flex items-center px-2 mb-4 bg-white rounded rating w-fit"
                 >
                   <span class="text-[16px] text-main font-medium block">{{
                     item.ratingsAverage
                   }}</span>
-                  <span class="text-third block align-text-bottom">
+                  <span class="block align-text-bottom text-third">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
@@ -69,33 +69,34 @@
             </div>
 
             <div
-              class="actions flex justify-end md:flex-col items-center gap-4 py-2"
+              class="flex items-center justify-end gap-4 py-2 actions md:flex-col"
             >
               <app-cart-button [itemID]="item._id"></app-cart-button>
-              <a
-                (click)="removeWhishListItem(item._id, $event)"
-                class="text-red-800 border items-center flex justify-center border-red-800 transition-colors size-[35px] p-1.5 text-[20px] rounded hover:text-white hover:bg-red-600 hover:border-red-600"
+              <button
+                #removeItem
+                (click)="removeWhishListItem(item._id, removeItem)"
+                class="text-red-800 border cursor-pointer items-center flex justify-center border-red-800 transition-colors size-[35px] p-1.5 text-[20px] rounded hover:text-white hover:bg-red-600 hover:border-red-600"
               >
-                <span class="hidden spiner-icon"
-                  ><i class="fa-solid fa-spinner fa-spin"></i
-                ></span>
-                <span class="trash-icon flex items-center justify-center"
-                  ><i class="fa-solid fa-trash-can"></i
-                ></span>
-              </a>
+                <span class="hidden spiner-icon">
+                  <i class="fa-solid fa-spinner fa-spin"></i>
+                </span>
+                <span class="flex items-center justify-center trash-icon">
+                  <i class="fa-solid fa-trash-can"></i>
+                </span>
+              </button>
             </div>
           </div>
 
           }} @else {
           <div
-            class="empty flex flex-col justify-center items-center content-center h-full"
+            class="flex flex-col items-center content-center justify-center h-full empty"
           >
             <span class="text-[150px] text-second"
               ><i class="fa-regular fa-heart"></i
             ></span>
             <p class="text-[20px]">Your WhishList is empty !!</p>
             <a
-              class="rounded bg-main hover:bg-second transition-colors p-2 text-white mt-6"
+              class="p-2 mt-6 text-white transition-colors rounded bg-main hover:bg-second"
               >Shop Now</a
             >
           </div>

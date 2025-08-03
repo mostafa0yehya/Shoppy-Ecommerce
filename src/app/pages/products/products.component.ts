@@ -3,13 +3,16 @@ import { SliderModule } from 'primeng/slider';
 import { FormsModule } from '@angular/forms';
 import { ProductsFilter } from '../../shared/interfaces/products-filter';
 import { ProductService } from '../../core/services/product.service';
-import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { PaginatorModule } from 'primeng/paginator';
 import { Product } from '../../shared/interfaces/product';
 import { ProductComponent } from '../../shared/components/business/product/product.component';
 import { Category } from '../../shared/interfaces/category';
 import { CategoriesService } from '../../core/services/categories.service';
 import { SelectModule } from 'primeng/select';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { AccordionModule } from 'primeng/accordion';
+import { DrawerModule } from 'primeng/drawer';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -20,6 +23,9 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     ProductComponent,
     SelectModule,
     SelectButtonModule,
+    AccordionModule,
+    DrawerModule,
+    RouterLink,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
@@ -34,15 +40,15 @@ export class ProductsComponent implements OnInit {
   //pagination vairables
   totalRecords = 0;
   first = 0;
-  rows = 10;
+  rows = 20;
   //pagination vairables
 
   //filter parameters
   param: ProductsFilter = {
     page: 1,
-    limit: 10,
+    limit: 20,
   };
-
+  visible = false;
   getAllProducts() {
     this.productsService.getAllProducts(this.param).subscribe({
       next: (res) => {
@@ -115,6 +121,8 @@ export class ProductsComponent implements OnInit {
     },
   ];
   onSortChange() {
+    console.log(this.param);
+
     this.resetPage();
     this.getAllProducts();
   }
@@ -135,4 +143,6 @@ export class ProductsComponent implements OnInit {
   setPageLinkSize() {
     this.pageLinkSize = window.innerWidth < 768 ? 1 : 5;
   }
+
+  closeCallback() {}
 }

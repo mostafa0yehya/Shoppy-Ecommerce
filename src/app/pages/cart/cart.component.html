@@ -27,7 +27,7 @@
 
     <div class="details flex my-4 gap-14 flex-wrap overflow-x-hidden p-4">
       <div
-        class="w-full lg:w-[60%] overflow-auto md:block bg-section rounded-2xl cart-holder border-gray-400"
+        class="w-full lg:w-[60%] overflow-auto md:block rounded-2xl cart-holder border-gray-400"
         data-aos="fade-right"
         data-aos-delay="100"
         data-aos-duration="800"
@@ -68,75 +68,60 @@
                 >
               </div>
               <div class="actions flex gap-5 items-center">
-                <a
-                  (click)="removeItem(product.product._id)"
-                  class="text-red-800 border h-fit items-center flex justify-center border-red-800 transition-colors w-fit p-1 rounded hover:text-white hover:bg-red-600 hover:border-red-600"
-                  ><svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
+                <button
+                  #anchor
+                  (click)="removeItem(product.product._id, anchor)"
+                  class="text-red-800 border disabled:bg-gray-200 disabled:border-gray-200 items-center flex justify-center border-red-800 transition-colors w-fit p-1.5 rounded hover:text-white hover:bg-red-600 hover:border-red-600"
+                >
+                  <span class="hidden spiner-icon">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                  </span>
+                  <span
+                    class="trash-icon flex items-center justify-center main-icon"
                   >
-                    <path
-                      fill="currentColor"
-                      d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z"
-                    />
-                  </svg>
-                </a>
+                    <i class="fa-solid fa-trash-can"></i>
+                  </span>
+                </button>
 
                 <div
-                  class="border border-gray-500 rounded py-2 flex justify-between px-2 w-[150px]"
+                  class="border border-gray-300 rounded py-2 flex justify-between items-center px-2 w-[120px]"
                 >
                   <button
+                    #decreaseBtn
                     (click)="
                       updateProductQuantity(
                         product.product._id,
-                        product.count - 1
+                        product.count - 1,
+                        decreaseBtn
                       )
                     "
-                    class="text-gray-600 transition-colors hover:bg-red-600 hover:text-white bg-white-600 p-1 rounded"
+                    class="text-gray-600 disabled:bg-gray-200 transition-colors cursor-pointer hover:bg-red-600 hover:text-white bg-white-600 p-1.5 rounded"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1.5"
-                        d="M20 12H4"
-                      />
-                    </svg>
+                    <span class="hidden spiner-icon">
+                      <i class="fa-solid fa-spinner fa-spin"></i>
+                    </span>
+                    <span class="main-icon"
+                      ><i class="fa-solid fa-minus"></i
+                    ></span>
                   </button>
-                  <span>{{ product.count }}</span>
+                  <span class="text-[18px]">{{ product.count }}</span>
                   <button
+                    #increaseBtn
                     (click)="
                       updateProductQuantity(
                         product.product._id,
-                        product.count + 1
+                        product.count + 1,
+                        increaseBtn
                       )
                     "
-                    class="text-gray-600 transition-colors hover:bg-green-600 hover:text-white bg-white-600 p-1 rounded"
+                    class="text-gray-600 transition-colors disabled:bg-gray-200 cursor-pointer p-1.5 hover:bg-green-600 hover:text-white bg-white-600 rounded"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1.5"
-                        d="M12 4v16m8-8H4"
-                      />
-                    </svg>
+                    <span class="hidden spiner-icon">
+                      <i class="fa-solid fa-spinner fa-spin"></i>
+                    </span>
+                    <span class="main-icon">
+                      <i class="fa-solid fa-plus"></i>
+                    </span>
                   </button>
                 </div>
               </div>
@@ -193,7 +178,7 @@
           </span>
           <span class="text-[16px]">{{ getDeliveryDate() }}</span>
         </div>
-        <form class="relative w-[80%] md:w-full">
+        <div class="relative w-[80%] md:w-full">
           <input
             type="text"
             placeholder="Coupon Code"
@@ -204,7 +189,7 @@
           >
             Apply
           </button>
-        </form>
+        </div>
         @if(cart.numOfCartItems>0){
         <div class="flex items-center mt-8 gap-5">
           <a

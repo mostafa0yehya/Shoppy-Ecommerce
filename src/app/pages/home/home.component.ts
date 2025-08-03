@@ -49,10 +49,7 @@ export class HomeComponent implements OnInit {
       },
     },
     spaceBetween: 10,
-    autoplay: {
-      delay: 2500,
-      disableOnInteraction: false,
-    },
+
     speed: 250,
 
     threshold: 5,

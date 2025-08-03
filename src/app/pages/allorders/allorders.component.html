@@ -1,6 +1,6 @@
 <section class="min-h-[80vh] mb-6 mt-20">
-  <div class="container mx-auto px-3">
-    <div class="navigation my-4 py-2">
+  <div class="container px-3 mx-auto">
+    <div class="py-2 my-4 navigation">
       <a
         [routerLink]="['/home']"
         class="text-gray-400 text-[14px] font-extrabold hover:text-gray-900 transition-colors"
@@ -10,7 +10,7 @@
 
       <span class="text-gray-800 text-[14px] font-medium"> MyOrders</span>
     </div>
-    <div class="title flex items-center gap-2 mb-5">
+    <div class="flex items-center gap-2 mb-5 title">
       <div class="icon text-second">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -32,21 +32,21 @@
       </div>
     </div>
     <div
-      class="orders-summary grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-5"
+      class="grid grid-cols-1 gap-5 mb-5 orders-summary md:grid-cols-2 lg:grid-cols-3"
     >
-      <div class="box border-gray-300 border rounded p-4">
+      <div class="p-4 border border-gray-300 rounded box">
         <h3 class="text-gray-700 text-[25px]">Total Orders</h3>
         <span class="text-[30px] font-bold text-main block">{{
           userOrders?.length
         }}</span>
       </div>
-      <div class="box border-gray-300 border rounded p-4">
+      <div class="p-4 border border-gray-300 rounded box">
         <h3 class="text-gray-700 text-[25px]">Paid Orders</h3>
         <span class="text-[30px] font-bold text-second block">{{
           getNumberOfPaidOrders()
         }}</span>
       </div>
-      <div class="box border-gray-300 border rounded p-4">
+      <div class="p-4 border border-gray-300 rounded box">
         <h3 class="text-gray-700 text-[25px]">Delivered Orders</h3>
         <span class="text-[30px] font-bold text-third block">{{
           getNumberOfDeliveredOrders()
@@ -59,12 +59,12 @@
       <p-accordion value="0">
         <p-accordion-panel
           value="i"
-          class="border-gray-300 border my-4 rounded"
+          class="my-4 border border-gray-300 rounded"
         >
           <p-accordion-header>
             <div class="flex flex-col gap-2">
               <h4>
-                <span class="text-main capitalize">order #</span>
+                <span class="capitalize text-main">order #</span>
                 {{ order.id }}
               </h4>
               <span class="text-[13.5px] text-gray-400 block">{{
@@ -132,7 +132,7 @@
               </h3>
               @for (item of order.cartItems; track item._id) {
               <div
-                class="product flex justify-between bg-gray-100 rounded p-4 mb-4"
+                class="flex justify-between p-4 mb-4 bg-gray-100 rounded product"
               >
                 <div class="flex gap-2 items-cente">
                   <img
@@ -140,7 +140,7 @@
                     class="size-[60px] object-cover"
                     alt=""
                   />
-                  <div class="info flex flex-col gap-2">
+                  <div class="flex flex-col gap-2 info">
                     <h4>{{ item.product.title }}</h4>
                     <p class="text-gray-400 text-[14px] mb-0">
                       Brand : {{ item.product.brand.name }}

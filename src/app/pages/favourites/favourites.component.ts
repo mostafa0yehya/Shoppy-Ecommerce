@@ -29,19 +29,28 @@ export class FavouritesComponent implements OnInit {
       },
     });
   }
-  removeWhishListItem(id: string, event: any) {
-    const anchor = event.currentTarget as HTMLElement;
-    this.render.removeClass(anchor.querySelector('.spiner-icon'), 'hidden');
-    this.render.addClass(anchor.querySelector('.trash-icon'), 'hidden');
-
+  removeWhishListItem(id: string, button: HTMLElement) {
+    this.showSpiner(button);
     this.whisListService.removeWhisListItem(id).subscribe({
       next: (res) => {
         this.getUserWhishList();
         this.whisListService.whishListArray.next(res.data);
         this.toast.showSucess(res.message);
-        this.render.addClass(anchor.querySelector('.spiner-icon'), 'hidden');
-        this.render.removeClass(anchor.querySelector('.trash-icon'), 'hidden');
+      },
+      error: () => {
+        this.hideSpiner(button);
       },
     });
+  }
+
+  showSpiner(button: HTMLElement) {
+    this.render.removeClass(button.querySelector('.spiner-icon'), 'hidden');
+    this.render.addClass(button.querySelector('.trash-icon'), 'hidden');
+    this.render.setAttribute(button, 'disabled', 'true');
+  }
+  hideSpiner(anchor: HTMLElement) {
+    this.render.addClass(anchor.querySelector('.spiner-icon'), 'hidden');
+    this.render.removeClass(anchor.querySelector('.main-icon'), 'hidden');
+    this.render.removeAttribute(anchor, 'disabled');
   }
 }

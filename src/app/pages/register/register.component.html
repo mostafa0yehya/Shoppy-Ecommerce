@@ -1,11 +1,9 @@
-<div
-  class="overflow-hidden register lg:min-h-[calc(100vh_-_100px)] flex items-center mt-20"
->
+<div class="flex items-center min-h-screen overflow-hidden register">
   <div
-    class="container mx-auto md:w-[95%] grid grid-cols-1 lg:grid-cols-2 px-3 rounded-3xl pt-8 bg-section py-8 my-6"
+    class="container mx-auto md:w-[85%] grid grid-cols-1 lg:grid-cols-2 px-3 rounded-3xl pt-8 bg-section py-8 my-6 overflow-hidden"
   >
     <div
-      class="image flex flex-col justify-cente items-center"
+      class="flex flex-col items-center justify-center image"
       data-aos="fade-right"
       data-aos-delay="100"
       data-aos-duration="800"
@@ -17,17 +15,17 @@
       <img src="/images/Shopping-cuate.svg" class="w-full lg:w-[65%]" />
     </div>
     <div
-      class="form-register px-5 overflow-auto"
+      class="px-5 overflow-auto form-register"
       data-aos="fade-left"
       data-aos-delay="200"
       data-aos-duration="1000"
     >
-      <div class="heading mb-5 bg-ma">
+      <div class="mb-5 heading bg-ma">
         <h1 class="text-[35px] font-bold text-main">Register</h1>
         <p class="text-pargraph">Create an Account to acess all features</p>
       </div>
       <form [formGroup]="formInputs" (ngSubmit)="handelsignUp()">
-        <div class="flex justify-between flex-wrap">
+        <div class="flex flex-wrap justify-between">
           <div class="input-group w-full md:w-[49%] mb-6">
             <p-floatlabel variant="in" class="w-full">
               <input
@@ -43,7 +41,7 @@
             @if(formInputs.get("name")?.touched&&formInputs.get("name")?.invalid
             ){
             <div
-              class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+              class="flex items-center p-4 mt-2 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
               role="alert"
             >
               <span class="sr-only">Error</span>
@@ -97,7 +95,7 @@
             @if(formInputs.get("phone")?.touched&&formInputs.get("phone")?.invalid
             ){
             <div
-              class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
+              class="flex items-center p-4 mt-2 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
               role="alert"
             >
               <span class="sr-only">Error</span>
@@ -123,7 +121,7 @@
             }
           </div>
         </div>
-        <div class="input-group mb-6 w-full">
+        <div class="w-full mb-6 input-group">
           <p-floatlabel variant="in" class="w-full">
             <input
               pInputText
@@ -137,7 +135,7 @@
 
           @if(formInputs.get("email")?.touched&&formInputs.get("email")?.invalid){
           <div
-            class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
+            class="flex items-center p-4 mt-2 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
             role="alert"
           >
             <span class="sr-only">Error</span>
@@ -164,7 +162,7 @@
 
           }
         </div>
-        <div class="flex justify-between flex-wrap">
+        <div class="flex flex-wrap justify-between">
           <div class="input-group w-full md:w-[49%] mb-6">
             <p-floatlabel variant="in" class="w-full">
               <input
@@ -180,7 +178,7 @@
 
             @if(formInputs.get("password")?.touched&&formInputs.get("password")?.invalid){
             <div
-              class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+              class="flex items-center p-4 mt-2 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
               role="alert"
             >
               <span class="sr-only">Error</span>
@@ -225,7 +223,7 @@
 
             @if(formInputs.get("rePassword")?.touched&&formInputs.get("rePassword")?.invalid){
             <div
-              class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+              class="flex items-center p-4 mt-2 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
               role="alert"
             >
               <span class="sr-only">Error</span>
@@ -264,7 +262,7 @@
             }
             @if(formInputs.getError("passwordMatchResult")&&formInputs.get("password")?.dirty){
             <div
-              class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+              class="flex items-center p-4 mt-2 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
               role="alert"
             >
               <span class="font-medium"
@@ -290,7 +288,7 @@
       </form>
       <div class="flex items-center gap-4 my-4 w-[70%] mx-auto">
         <hr class="flex-grow border-t border-gray-300" />
-        <span class="text-gray-500 text-sm">OR</span>
+        <span class="text-sm text-gray-500">OR</span>
         <hr class="flex-grow border-t border-gray-300" />
       </div>
       <div class="text-center">
@@ -298,7 +296,7 @@
           Already have an account?
           <a
             routerLink="/login"
-            class="text-main font-semibold hover:underline transition hover:text-second"
+            class="font-semibold transition text-main hover:underline hover:text-second"
             >Login here</a
           >
         </p>

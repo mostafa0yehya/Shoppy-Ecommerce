@@ -1,4 +1,4 @@
-<div class="overflow-hidden login h-screen flex items-center">
+<div class="flex items-center h-screen overflow-hidden login">
   <div
     class="container mx-auto md:w-[95%] grid grid-cols-1 lg:grid-cols-2 rounded-3xl px-5 bg-section py-8 my-6"
   >
@@ -39,7 +39,7 @@
 
         @if(formObj.get("email")?.touched &&formObj.get("email")?.invalid ){
         <div
-          class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+          class="flex items-center p-4 mt-2 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
           role="alert"
         >
           <span class="sr-only">Error</span>
@@ -73,10 +73,10 @@
           />
           <label for="in_label">Password</label>
         </p-floatlabel>
-        <div class="text-end mb-4">
+        <div class="mb-4 text-end">
           <a
             routerLink="/forgotPassword"
-            class="text-sm text-main hover:underline transition hover:text-second"
+            class="text-sm transition text-main hover:underline hover:text-second"
           >
             Forgot your password?
           </a>
@@ -84,7 +84,7 @@
         @if(formObj.get("password")?.touched&&formObj.get("password")?.invalid
         ){
         <div
-          class="mt-2 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
+          class="flex items-center p-4 mt-2 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 fade"
           role="alert"
         >
           <span class="sr-only">Error</span>
@@ -127,7 +127,7 @@
           Don't have an account?
           <a
             routerLink="/register"
-            class="text-main font-semibold hover:underline transition hover:text-second"
+            class="font-semibold transition text-main hover:underline hover:text-second"
           >
             Register here
           </a>

@@ -1,9 +1,9 @@
 @if(productsList){
-<section class="py-5 mt-15 products-category">
-  @if(category){
+<section class="mt-15 products-category">
+  @if(brand){
   <div class="max-w-3xl px-4 mx-auto mt-10 mb-10 text-center title">
     <h2 class="mb-4 text-3xl font-bold text-second section-head">
-      {{ category.name }}
+      {{ brand.name }}
     </h2>
   </div>
   }
@@ -15,11 +15,14 @@
         >Home
       </a>
       <span class="text-gray-400"> ></span>
-      <span class="text-gray-400 text-[16px] font-bold"> Categories </span>
+      <a
+        [routerLink]="['/brands']"
+        class="text-gray-400 text-[16px] font-bold hover:text-gray-900 transition-colors"
+      >
+        Barnds
+      </a>
       <span class="text-gray-400"> > </span>
-      <span class="text-gray-400 text-[16px] font-extrabold"
-        >{{ category?.name }}
-      </span>
+      <span class="font-semibold text-gray-400">{{ brand?.name }}</span>
     </div>
     @if( productsList.length > 0){
 
@@ -38,7 +41,7 @@
     } @else {
     <div class="flex flex-col items-center justify-center w-full py-10 empty">
       <h2 class="text-main text-4xl text-center w-[70%] capitalize">
-        no products in this category at the moment
+        no products in this Brand at the moment
         <span><i class="fa-regular fa-face-frown"></i></span>
       </h2>
       <img src="/images/Empty-cuate (1).svg" class="w-[450px]" />
@@ -47,5 +50,4 @@
     }
   </div>
 </section>
-
 }

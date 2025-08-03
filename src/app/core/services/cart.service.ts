@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class CartService {
   numberOfCartItemsSubject = new BehaviorSubject<number>(0);
+
   constructor(private httpClient: HttpClient) {}
   addToCart(id: string): Observable<any> {
     return this.httpClient.post(

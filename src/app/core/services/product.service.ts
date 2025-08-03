@@ -32,6 +32,9 @@ export class ProductService {
     if (parm?.category) {
       params = params.set('category[in]', parm.category);
     }
+    if (parm?.brand) {
+      params = params.set('brand', parm.brand);
+    }
     console.log(params);
 
     return this.httpClient.get(

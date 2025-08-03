@@ -1,9 +1,6 @@
-import { Routes, withComponentInputBinding } from '@angular/router';
+import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
-import { AboutComponent } from './pages/about/about.component';
-import { BlogComponent } from './pages/blog/blog.component';
 import { CartComponent } from './pages/cart/cart.component';
-import { ContactComponent } from './pages/contact/contact.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -18,6 +15,9 @@ import { FavouritesComponent } from './pages/favourites/favourites.component';
 import { CheckOutComponent } from './pages/check-out/check-out.component';
 import { AllordersComponent } from './pages/allorders/allorders.component';
 import { CategoryComponent } from './pages/category/category.component';
+import { BrandsComponent } from './pages/brands/brands.component';
+import { SingleBrandComponent } from './pages/single-brand/single-brand.component';
+import { noAuthGuard } from './core/guards/no-auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -28,34 +28,45 @@ export const routes: Routes = [
     component: ProductDetailsComponent,
     canActivate: [authGuard],
   },
+  { path: 'brands', component: BrandsComponent },
 
-  { path: 'contact', component: ContactComponent },
-  { path: 'cart', canActivate: [authGuard], component: CartComponent },
+  {
+    path: 'brand/:id',
+    component: SingleBrandComponent,
+  },
   {
     path: 'category/:id',
     component: CategoryComponent,
     canActivate: [authGuard],
   },
   {
-    path: 'allorders',
+    path: 'favourites',
     canActivate: [authGuard],
-    component: AllordersComponent,
+    component: FavouritesComponent,
   },
+  { path: 'cart', canActivate: [authGuard], component: CartComponent },
   {
     path: 'checkOut/:id/:type',
     canActivate: [authGuard],
     component: CheckOutComponent,
   },
+
   {
-    path: 'favourites',
+    path: 'allorders',
     canActivate: [authGuard],
-    component: FavouritesComponent,
+    component: AllordersComponent,
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  {
+    path: 'register',
+    canActivate: [noAuthGuard],
+    component: RegisterComponent,
+  },
+  { path: 'login', canActivate: [noAuthGuard], component: LoginComponent },
+
   {
     path: 'forgotPassword',
     component: ForgotPasswordComponent,
+    canActivate: [noAuthGuard],
     children: [
       { path: 'sendEmail', component: SendEmailComponent },
       { path: 'verifyCode', component: VerifyCodeComponent },

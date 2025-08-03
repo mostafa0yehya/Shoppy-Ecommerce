@@ -1,12 +1,12 @@
-<div class="brands flex overflow-hidden">
-  <div class="brand-slider flex w-fit">
+<div class="flex overflow-hidden brands">
+  <div class="flex brand-slider w-fit">
     @for (brand of brandsList; track brand._id) {
     <div class="brand shrink-0 w-[100px]">
       <img [src]="brand.image" [alt]="brand.name" class="w-full" />
     </div>
     }
   </div>
-  <div class="brand-slider flex w-fit">
+  <div class="flex brand-slider w-fit">
     @for (brand of brandsList; track brand._id) {
     <div class="brand shrink-0 w-[100px]">
       <img [src]="brand.image" [alt]="brand.name" class="w-full" />

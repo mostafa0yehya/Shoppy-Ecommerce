@@ -1,3 +1,7 @@
 .clear:hover span {
   color: white;
 }
+
+.filter-btn {
+  writing-mode: vertical-lr;
+}
