@@ -65,9 +65,15 @@ export const routes: Routes = [
 
   {
     path: 'forgotPassword',
+
     component: ForgotPasswordComponent,
     canActivate: [noAuthGuard],
     children: [
+      {
+        path: '',
+        redirectTo: 'sendEmail',
+        pathMatch: 'full',
+      },
       { path: 'sendEmail', component: SendEmailComponent },
       { path: 'verifyCode', component: VerifyCodeComponent },
       { path: 'resetPassword', component: ResetPasswordComponent },
