@@ -21,12 +21,20 @@ import { noAuthGuard } from './core/guards/no-auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, canActivate: [authGuard] },
-  { path: 'products', component: ProductsComponent, canActivate: [authGuard] },
+  {
+    path: 'home',
+    component: HomeComponent,
+    // canActivate: [authGuard]
+  },
+  {
+    path: 'products',
+    component: ProductsComponent,
+    //  canActivate: [authGuard]
+  },
   {
     path: 'productDetails/:id',
     component: ProductDetailsComponent,
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
   },
   { path: 'brands', component: BrandsComponent },
 
@@ -37,7 +45,7 @@ export const routes: Routes = [
   {
     path: 'category/:id',
     component: CategoryComponent,
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
   },
   {
     path: 'favourites',

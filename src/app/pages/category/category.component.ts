@@ -6,6 +6,8 @@ import { ProductComponent } from '../../shared/components/business/product/produ
 import { Category } from '../../shared/interfaces/category';
 import { PaginatorModule } from 'primeng/paginator';
 import { RouterLink } from '@angular/router';
+import { AuthServiceService } from '../../core/services/auth-service.service';
+import { WishlistService } from '../../core/services/wishlist.service';
 @Component({
   selector: 'app-category',
   imports: [ProductComponent, PaginatorModule, RouterLink],
@@ -18,7 +20,9 @@ export class CategoryComponent implements OnInit {
   productService = inject(ProductService);
   productsList: Product[] | null = null;
   category: Category | null = null;
-
+  wishlistService = inject(WishlistService);
+  auth = inject(AuthServiceService);
+  isLoggedIn = false;
   //pagination parmas
   rows = 0;
   totalRecords = 0;
@@ -27,6 +31,7 @@ export class CategoryComponent implements OnInit {
     this.param = { category: this.id, limit: 10 };
 
     this.getAllProducts();
+    this.subscribeInWishList();
   }
   getAllProducts() {
     this.productService.getAllProducts(this.param).subscribe({
@@ -44,5 +49,18 @@ export class CategoryComponent implements OnInit {
     this.param.limit = event.rows;
     this.first = event.first;
     this.getAllProducts();
+  }
+
+  subscribeInWishList() {
+    this.auth.isLoggedIn.subscribe({
+      next: (value) => {
+        this.isLoggedIn = value;
+        if (this.isLoggedIn) {
+          //whislist array subject to mark whislisted  products of user with diffrent color
+
+          this.wishlistService.subscribeOnWishListArray();
+        }
+      },
+    });
   }
 }

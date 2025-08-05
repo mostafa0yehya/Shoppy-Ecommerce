@@ -7,6 +7,8 @@ import { Product } from '../../shared/interfaces/product';
 import { PaginatorModule } from 'primeng/paginator';
 import { ProductService } from '../../core/services/product.service';
 import { RouterLink } from '@angular/router';
+import { WishlistService } from '../../core/services/wishlist.service';
+import { AuthServiceService } from '../../core/services/auth-service.service';
 
 @Component({
   selector: 'app-single-brand',
@@ -22,6 +24,10 @@ export class SingleBrandComponent implements OnInit {
 
   productsList: Product[] | null = null;
   brand: Brand | null = null;
+
+  wishlistService = inject(WishlistService);
+  auth = inject(AuthServiceService);
+  isLoggedIn = false;
   //pagination parmas
   rows = 0;
   totalRecords = 0;
@@ -31,6 +37,7 @@ export class SingleBrandComponent implements OnInit {
     this.param = { brand: this.id, limit: 10 };
 
     this.getAllProducts();
+    this.subscribeInWishList();
   }
   getAllProducts() {
     this.productService.getAllProducts(this.param).subscribe({
@@ -50,5 +57,18 @@ export class SingleBrandComponent implements OnInit {
     this.param.limit = event.rows;
     this.first = event.first;
     this.getAllProducts();
+  }
+
+  subscribeInWishList() {
+    this.auth.isLoggedIn.subscribe({
+      next: (value) => {
+        this.isLoggedIn = value;
+        if (this.isLoggedIn) {
+          //whislist array subject to mark whislisted  products of user with diffrent color
+
+          this.wishlistService.subscribeOnWishListArray();
+        }
+      },
+    });
   }
 }

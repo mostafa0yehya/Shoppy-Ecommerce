@@ -13,6 +13,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { AccordionModule } from 'primeng/accordion';
 import { DrawerModule } from 'primeng/drawer';
 import { RouterLink } from '@angular/router';
+import { WishlistService } from '../../core/services/wishlist.service';
+import { AuthServiceService } from '../../core/services/auth-service.service';
 
 @Component({
   selector: 'app-products',
@@ -33,8 +35,11 @@ import { RouterLink } from '@angular/router';
 export class ProductsComponent implements OnInit {
   productsService = inject(ProductService);
   categoryService = inject(CategoriesService);
+  wishlistService = inject(WishlistService);
+  auth = inject(AuthServiceService);
   productList: Product[] | null = null;
   categories: Category[] | null = null;
+  isLoggedIn = false;
 
   rangeValues = [0, 20000];
   //pagination vairables
@@ -61,6 +66,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProducts();
     this.getCategories();
+    this.subscribeInWishList();
   }
 
   onPageChange(event: any) {
@@ -143,6 +149,16 @@ export class ProductsComponent implements OnInit {
   setPageLinkSize() {
     this.pageLinkSize = window.innerWidth < 768 ? 1 : 5;
   }
+  subscribeInWishList() {
+    this.auth.isLoggedIn.subscribe({
+      next: (value) => {
+        this.isLoggedIn = value;
+        if (this.isLoggedIn) {
+          //whislist array subject to mark whislisted  products of user with diffrent color
 
-  closeCallback() {}
+          this.wishlistService.subscribeOnWishListArray();
+        }
+      },
+    });
+  }
 }

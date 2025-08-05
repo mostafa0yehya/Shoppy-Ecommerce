@@ -34,3 +34,22 @@
 </button>
 
 }
+
+<p-dialog
+  header="Edit Profile"
+  header="Authentication Required"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '20rem' }"
+  appendTo="body"
+  closeOnEscape="true"
+  dismissableMask="true"
+  [style]="{ width: '25rem' }"
+>
+  <p class="text-lg mb-6 font-medium">You need to login to continue</p>
+
+  <div class="flex justify-end gap-2">
+    <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+    <p-button label="Login" routerLink="/login" (click)="visible = false" />
+  </div>
+</p-dialog>

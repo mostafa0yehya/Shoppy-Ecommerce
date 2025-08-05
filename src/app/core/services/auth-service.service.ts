@@ -61,4 +61,8 @@ export class AuthServiceService {
       return null;
     }
   }
+
+  openLoginModal() {
+    return true;
+  }
 }

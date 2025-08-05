@@ -16,6 +16,8 @@ import { SwiperContainer } from 'swiper/element';
 import { SwiperOptions } from 'swiper/types';
 import { BrandSliderComponent } from '../../shared/components/brand-slider/brand-slider.component';
 import { RouterLink } from '@angular/router';
+import { WishlistService } from '../../core/services/wishlist.service';
+import { AuthServiceService } from '../../core/services/auth-service.service';
 
 @Component({
   selector: 'app-home',
@@ -30,9 +32,9 @@ import { RouterLink } from '@angular/router';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeComponent implements OnInit {
-  productService = inject(ProductService);
-  categoryService = inject(CategoriesService);
-  @ViewChild('swiperRef') swiperRef!: ElementRef<SwiperContainer>;
+  isLoggedIn = false;
+  categories: Category[] | null = null;
+  productList: Product[] = [];
   swiperConfig: SwiperOptions = {
     breakpoints: {
       0: {
@@ -54,38 +56,59 @@ export class HomeComponent implements OnInit {
 
     threshold: 5,
   };
+  @ViewChild('swiperRef') swiperRef!: ElementRef<SwiperContainer>;
+
+  productService = inject(ProductService);
+  categoryService = inject(CategoriesService);
+  wishlistService = inject(WishlistService);
+  auth = inject(AuthServiceService);
+
+  ngOnInit(): void {
+    this.getCategories();
+    this.getProducts();
+    this.subscribeInWishList();
+  }
+
   ngAfterViewInit() {
     Object.assign(this.swiperRef.nativeElement, this.swiperConfig);
     this.swiperRef.nativeElement.initialize();
   }
-  categories: Category[] | null = null;
-  productList: Product[] = [];
 
-  constructor(private eRef: ElementRef) {}
-  ngOnInit(): void {
-    this.categoryService.getAllCategories().subscribe({
-      next: (res) => {
-        this.categories = res.data;
-      },
-    });
+  getProducts() {
     this.productService
       .getAllProducts({ sort: '-price', limit: 60 })
       .subscribe({
         next: (response) => {
-          console.log(response);
-
           this.productList = response.data.filter(
             (product: Product) =>
               product.priceAfterDiscount != null &&
               product.priceAfterDiscount > 0
           );
-          console.log(this.productList);
         },
-        // error: (error) => {
-        //   console.log(error.error);
-        // },
       });
   }
+
+  getCategories() {
+    this.categoryService.getAllCategories().subscribe({
+      next: (res) => {
+        this.categories = res.data;
+      },
+    });
+  }
+
+  subscribeInWishList() {
+    this.auth.isLoggedIn.subscribe({
+      next: (value) => {
+        this.isLoggedIn = value;
+        if (this.isLoggedIn) {
+          //whislist array subject to mark whislisted  products of user with diffrent color
+
+          this.wishlistService.subscribeOnWishListArray();
+        }
+      },
+    });
+  }
+
   swipePrev() {
     this.swiperRef.nativeElement.swiper.slidePrev();
   }

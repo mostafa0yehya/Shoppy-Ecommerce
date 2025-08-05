@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  inject,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductService } from '../../core/services/product.service';
 import { Product } from '../../shared/interfaces/product';
@@ -16,6 +10,10 @@ import { SwiperContainer } from 'swiper/element';
 import { SwiperOptions } from 'swiper/types';
 import { ToastService } from '../../core/services/toast.service';
 import { ProductComponent } from '../../shared/components/business/product/product.component';
+import { AuthServiceService } from '../../core/services/auth-service.service';
+import { WishlistService } from '../../core/services/wishlist.service';
+import { DialogModule } from 'primeng/dialog';
+import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-product-details',
@@ -24,6 +22,8 @@ import { ProductComponent } from '../../shared/components/business/product/produ
     RouterLink,
     WishlisButtonComponent,
     ProductComponent,
+    DialogModule,
+    Button,
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
@@ -65,8 +65,12 @@ export class ProductDetailsComponent {
 
     threshold: 5,
   };
+  auth = inject(AuthServiceService);
+  wishlistService = inject(WishlistService);
 
   toast = inject(ToastService);
+  isLoggedIn = false;
+  visible = false;
 
   showspin = false;
   productId: string | null = null;
@@ -82,6 +86,7 @@ export class ProductDetailsComponent {
   ngOnInit(): void {
     this.getProduct();
     this.getAllProducts();
+    this.subscribeInWishList();
   }
   calcRating() {
     this.stars = [];
@@ -101,18 +106,22 @@ export class ProductDetailsComponent {
 
   cartService = inject(CartService);
   addToCart(id: string) {
-    this.showspin = true;
-    this.cartService.addToCart(id).subscribe({
-      next: (res) => {
-        this.showspin = false;
-        this.toast.showSucess(res.message);
+    if (this.isLoggedIn) {
+      this.showspin = true;
+      this.cartService.addToCart(id).subscribe({
+        next: (res) => {
+          this.showspin = false;
+          this.toast.showSucess(res.message);
 
-        console.log(res);
-      },
-      error: (err) => {
-        this.showspin = false;
-      },
-    });
+          console.log(res);
+        },
+        error: (err) => {
+          this.showspin = false;
+        },
+      });
+    } else {
+      this.visible = true;
+    }
   }
   getProduct() {
     this.activatedRoute.paramMap.subscribe({
@@ -176,5 +185,18 @@ export class ProductDetailsComponent {
           console.log(this.productList);
         },
       });
+  }
+
+  subscribeInWishList() {
+    this.auth.isLoggedIn.subscribe({
+      next: (value) => {
+        this.isLoggedIn = value;
+        if (this.isLoggedIn) {
+          //whislist array subject to mark whislisted  products of user with diffrent color
+
+          this.wishlistService.subscribeOnWishListArray();
+        }
+      },
+    });
   }
 }

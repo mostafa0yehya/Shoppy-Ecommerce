@@ -7,13 +7,7 @@ import { Item } from '../../shared/interfaces/whish-list-bag';
   providedIn: 'root',
 })
 export class WishlistService {
-  constructor(private httpClient: HttpClient) {
-    this.getUserwishlist().subscribe({
-      next: (res) => {
-        this.whishListArray.next((res.data as Item[]).map((item) => item.id));
-      },
-    });
-  }
+  constructor(private httpClient: HttpClient) {}
   whishListArray = new BehaviorSubject<string[]>([]);
   addToWishList(prodId: string): Observable<any> {
     return this.httpClient.post(
@@ -30,5 +24,13 @@ export class WishlistService {
     return this.httpClient.delete(
       `https://ecommerce.routemisr.com/api/v1/wishlist/${id}`
     );
+  }
+
+  subscribeOnWishListArray() {
+    this.getUserwishlist().subscribe({
+      next: (res) => {
+        this.whishListArray.next((res.data as Item[]).map((item) => item.id));
+      },
+    });
   }
 }
