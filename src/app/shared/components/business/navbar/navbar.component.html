@@ -33,6 +33,7 @@
           class="text-main font-semibold hover:text-second relative p-1.5 rounded transition-colors"
           >Brands</a
         >
+        @if(isLoggedIn){
 
         <a
           routerLink="/allorders"
@@ -40,6 +41,7 @@
           class="text-main font-semibold hover:text-second relative p-1.5 rounded transition-colors"
           >My Orders</a
         >
+        }
       </div>
       <!-- Desktop Menu -->
       <div class="items-center gap-2.5 hidden md:flex">
@@ -153,14 +155,14 @@
         >Brands</a
       >
 
+      @if(isLoggedIn){
+
       <a
         routerLink="/allorders"
         routerLinkActive="active"
         class="text-main font-semibold hover:text-second relative p-1.5 rounded transition-colors hover:bg-gray-200"
         >My Orders</a
       >
-      @if(isLoggedIn){
-
       <a
         (click)="logOut()"
         class="p-2 text-white capitalize transition-colors rounded bg-main hover:bg-second"
