@@ -15,6 +15,12 @@
   border: 3px solid var(--color-main);
 }
 swiper-container {
-  width: 100%;
+  width: 100% !important;
   height: 100%;
+}
+.imgages-slider {
+  height: fit-content !important;
+}
+.imgages-slider swiper-slide {
+  height: 100px !important;
 }

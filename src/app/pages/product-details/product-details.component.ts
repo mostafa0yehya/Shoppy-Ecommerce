@@ -43,6 +43,14 @@ export class ProductDetailsComponent {
     freeMode: true,
     direction: 'vertical',
     watchSlidesProgress: true,
+    breakpoints: {
+      0: {
+        direction: 'horizontal',
+      },
+      1024: {
+        direction: 'vertical',
+      },
+    },
   };
   simlarRefConfig: SwiperOptions = {
     breakpoints: {

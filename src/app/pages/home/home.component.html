@@ -26,12 +26,12 @@
       >
         <div
           [routerLink]="['/category', category._id]"
-          class="category-item relative h-[300px] rounded-4xl cursor-pointer"
+          class="category-item relative h-[300px] rounded-4xl cursor-pointer p-2"
         >
           <img
             [src]="category.image"
             alt="category.name"
-            class="w-full object-cover h-[250px] rounded-t-4xl"
+            class="w-full object-contain md:object-cover h-[250px] rounded-t-4xl"
           />
           <h2 class="text-center pt-2 text-main text-[20px]" data-aos="fade-in">
             {{ category.name }}
