@@ -37,7 +37,6 @@ export class VerifyCodeComponent {
         this.verifySpinner = false;
       },
       error: (error) => {
-        console.log(error);
         this.verifySpinner = false;
       },
     });

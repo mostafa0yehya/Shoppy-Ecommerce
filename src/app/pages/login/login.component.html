@@ -1,6 +1,6 @@
-<div class="flex items-center h-screen overflow-hidden login mt-10">
+<div class="flex items-center min-h-screen overflow-hidden login mt-10">
   <div
-    class="container mx-auto md:w-[95%] grid grid-cols-1 lg:grid-cols-2 rounded-3xl px-5 bg-section py-8"
+    class="container mx-auto md:w-[95%] grid grid-cols-1 lg:grid-cols-2 md:rounded-3xl px-5 bg-section py-8"
   >
     <div
       class="flex flex-col items-center justify-center image"
@@ -105,7 +105,7 @@
 
         <button
           [disabled]="formObj.invalid || showSpinner"
-          class="block md:w-[70%] bg-main mx-auto text-white rounded-[10px] py-2 transition hover:bg-second cursor-pointer disabled:bg-[#B980B6] disabled:cursor-not-allowed"
+          class="block md:w-[70%] px-2 bg-main mx-auto text-white rounded-[10px] py-2 transition hover:bg-second cursor-pointer disabled:bg-[#B980B6] disabled:cursor-not-allowed"
         >
           <span>LOGIN</span>
           @if(showSpinner){

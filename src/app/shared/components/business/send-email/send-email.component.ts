@@ -31,7 +31,6 @@ export class SendEmailComponent {
   });
   sendCodeStep() {
     this.showSpin = true;
-    console.log(this.sendCode);
     let emailValue = this.sendCode.controls.email.value;
     this.authServiceService.forgotPassword(this.sendCode.value).subscribe({
       next: (resbonse) => {
@@ -42,7 +41,6 @@ export class SendEmailComponent {
         this.router.navigate(['forgotPassword/verifyCode']);
       },
       error: (error) => {
-        console.log(error.error.message);
         this.showSpin = false;
       },
     });

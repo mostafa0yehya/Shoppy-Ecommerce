@@ -31,7 +31,6 @@ export class CartComponent implements OnInit {
         this.cart = res;
         this.ngxSpinner.hide();
         this.isLoading = true;
-        console.log(res);
       },
       error: (res) => {
         this.ngxSpinner.hide();
@@ -77,8 +76,6 @@ export class CartComponent implements OnInit {
     });
   }
   updateProductQuantity(productId: string, count: number, anchor: HTMLElement) {
-    console.log(anchor);
-
     this.showSpin(anchor);
 
     this.cartService.updateCartProductQuantity(productId, count).subscribe({

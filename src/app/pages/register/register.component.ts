@@ -51,8 +51,6 @@ export class RegisterComponent implements OnDestroy {
   private subscription!: Subscription;
 
   handelsignUp() {
-    console.log(this.formInputs);
-
     this.showSpinner = true;
     if (this.formInputs.valid) {
       this.subscription = this.authServiceService
@@ -64,11 +62,9 @@ export class RegisterComponent implements OnDestroy {
             this.formInputs.reset();
             this.showSpinner = false;
           },
-          // error: (error) => {
-          //   console.log(error);
-
-          //   this.showSpinner = false;
-          // },
+          error: (error) => {
+            this.showSpinner = false;
+          },
           complete: () => {},
         });
     }

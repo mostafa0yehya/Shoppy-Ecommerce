@@ -42,8 +42,6 @@ export class SingleBrandComponent implements OnInit {
   getAllProducts() {
     this.productService.getAllProducts(this.param).subscribe({
       next: (res) => {
-        console.log(res);
-
         this.productsList = res.data;
         if (this.productsList) this.brand = this.productsList[0].brand;
         this.totalRecords = res.results;

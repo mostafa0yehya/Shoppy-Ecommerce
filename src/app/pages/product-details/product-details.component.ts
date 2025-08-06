@@ -112,8 +112,6 @@ export class ProductDetailsComponent {
         next: (res) => {
           this.showspin = false;
           this.toast.showSucess(res.message);
-
-          console.log(res);
         },
         error: (err) => {
           this.showspin = false;
@@ -182,7 +180,6 @@ export class ProductDetailsComponent {
       .subscribe({
         next: (response) => {
           this.productList = response.data;
-          console.log(this.productList);
         },
       });
   }

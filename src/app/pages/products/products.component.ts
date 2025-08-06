@@ -127,8 +127,6 @@ export class ProductsComponent implements OnInit {
     },
   ];
   onSortChange() {
-    console.log(this.param);
-
     this.resetPage();
     this.getAllProducts();
   }

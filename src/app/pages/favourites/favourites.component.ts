@@ -25,7 +25,6 @@ export class FavouritesComponent implements OnInit {
     this.whisListService.getUserwishlist().subscribe({
       next: (res) => {
         this.whishListBag = res;
-        console.log(this.whishListBag);
       },
     });
   }

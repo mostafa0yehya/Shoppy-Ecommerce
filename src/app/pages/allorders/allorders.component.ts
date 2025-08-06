@@ -31,7 +31,6 @@ export class AllordersComponent implements OnInit {
       this.checkOutService.getUserOrders(this.user?.id).subscribe({
         next: (res) => {
           this.userOrders = res;
-          console.log(this.userOrders);
           this.cartService.updateNumberOfCartItems();
         },
       });

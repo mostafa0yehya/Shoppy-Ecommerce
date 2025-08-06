@@ -39,16 +39,13 @@ export class ResetPasswordComponent {
   });
   restPassword() {
     this.resetSpinner = true;
-    console.log(this.newPassword.value);
 
     this.authServiceService.resetPassword(this.newPassword.value).subscribe({
       next: (resbonse) => {
         this.router.navigate(['/login']);
         this.resetSpinner = false;
-        console.log(resbonse);
       },
       error: (error) => {
-        console.log(error);
         this.resetSpinner = false;
       },
     });
