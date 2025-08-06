@@ -68,4 +68,18 @@ export class NavbarComponent {
       },
     });
   }
+
+  @ViewChild('mobileMenu') mobileMenuRef!: ElementRef;
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    const clickedInside = this.mobileMenuRef?.nativeElement.contains(
+      event.target
+    );
+    const clickedButton = (event.target as HTMLElement).closest('button');
+
+    if (!clickedInside && !clickedButton) {
+      this.isOpen = false;
+    }
+  }
 }
