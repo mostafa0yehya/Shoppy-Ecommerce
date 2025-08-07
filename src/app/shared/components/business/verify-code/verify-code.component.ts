@@ -26,7 +26,7 @@ export class VerifyCodeComponent {
   verifySpinner = false;
 
   verfiyCode = new FormGroup({
-    resetCode: new FormControl('', [Validators.required]),
+    resetCode: new FormControl('', [Validators.minLength(4)]),
   });
   sendverify() {
     this.verifySpinner = true;

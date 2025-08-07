@@ -22,12 +22,12 @@
       @for (brand of brandsList; track brand._id) {
       <a [routerLink]="['/brand', brand._id]">
         <div
-          class="flex flex-col items-center justify-center gap-5 p-4 transition-all bg-white border border-white shadow-sm rounded-xl brand hover:border-second"
+          class="flex flex-col bg-white items-center justify-center gap-5 p-4 transition-all border border-white shadow-sm rounded-xl brand hover:border-second"
         >
           <img
             [src]="brand.image"
             [alt]="brand.name"
-            class="size-[100px] rounded-full shadow"
+            class="size-[100px] rounded-full shadow object-contain"
           />
 
           <h3 class="text-[18px] text-gray-800">{{ brand.name }}</h3>
