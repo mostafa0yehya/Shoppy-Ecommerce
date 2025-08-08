@@ -28,8 +28,8 @@ export class RegisterComponent implements OnDestroy {
     {
       name: new FormControl('', [
         Validators.required,
-        Validators.pattern('^[a-zA-Z][a-zA-Z0-9._]*(?<![._])$'),
-        Validators.minLength(3),
+        Validators.pattern('^[a-zA-Z][a-zA-Z0-9._ ]*(?<![._ ])$'),
+        Validators.minLength(5),
         Validators.maxLength(19),
       ]),
       email: new FormControl('', [Validators.email, Validators.required]),
