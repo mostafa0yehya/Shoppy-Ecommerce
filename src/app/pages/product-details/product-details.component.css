@@ -19,6 +19,11 @@ swiper-container {
   height: 100%;
 }
 
-.imgages-slider swiper-slide {
-  height: 100px !important;
+@media (max-width: 576px) {
+  .imgages-slider {
+    height: auto;
+  }
+  .imgages-slider swiper-slide {
+    height: 100px !important;
+  }
 }
