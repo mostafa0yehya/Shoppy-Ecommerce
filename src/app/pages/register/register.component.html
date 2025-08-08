@@ -67,11 +67,11 @@
                   </li>
                   } @if(formInputs.get("name")?.getError("pattern")){
                   <li class="mb-1 fade">
-                    <span class="font-medium"
-                      >Username must: Start with a letter Contain only letters,
-                      numbers, dots (.) or underscores (_) Not end with a dot or
-                      underscore.</span
-                    >
+                    <span class="font-medium">
+                      Username must: Start with a letter, may contain letters,
+                      numbers, dots (.), underscores (_), or spaces, and must
+                      not end with a dot, underscore, or space.
+                    </span>
                   </li>
                   }
                 </ul>
