@@ -230,14 +230,7 @@
 
               <div>
                 <ul class="list-disc list-inside">
-                  @if(formInputs.getError("passwordMatchResult")){
-                  <li>
-                    <span class="font-medium"
-                      >The password and confirm password fields must
-                      match.</span
-                    >
-                  </li>
-                  } @if(formInputs.get("rePassword")?.getError("required")){
+                  @if(formInputs.get("rePassword")?.getError("required")){
 
                   <li class="mb-1 fade">
                     <span class="font-medium">Password is required.</span>
@@ -260,7 +253,7 @@
             </div>
 
             }
-            @if(formInputs.getError("passwordMatchResult")&&formInputs.get("password")?.dirty){
+            @if(formInputs.getError("passwordMatchResult")&&formInputs.get("password")?.dirty&&formInputs.get("rePassword")?.touched){
             <div
               class="flex items-center p-4 mt-2 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
               role="alert"

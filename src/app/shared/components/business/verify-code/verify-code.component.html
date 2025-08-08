@@ -22,6 +22,11 @@
         <li class="mb-1 fade">
           <span class="font-medium">Verifcation Code is required.</span>
         </li>
+        } @if(verfiyCode.get("resetCode")?.getError("minlength")){
+
+        <li class="mb-1 fade">
+          <span class="font-medium">code must be at least 5 numbers </span>
+        </li>
         }
       </ul>
     </div>

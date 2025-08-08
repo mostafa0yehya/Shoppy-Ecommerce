@@ -26,11 +26,15 @@ export class VerifyCodeComponent {
   verifySpinner = false;
 
   verfiyCode = new FormGroup({
-    resetCode: new FormControl('', [Validators.minLength(4)]),
+    resetCode: new FormControl('', [
+      Validators.minLength(5),
+      Validators.required,
+    ]),
   });
   sendverify() {
-    this.verifySpinner = true;
+    console.log(this.verfiyCode.value);
 
+    this.verifySpinner = true;
     this.authServiceService.verifyResetCode(this.verfiyCode.value).subscribe({
       next: (resbonse) => {
         this.router.navigate(['forgotPassword/resetPassword']);
