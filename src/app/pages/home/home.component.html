@@ -19,12 +19,7 @@
       class="grid grid-cols-1 gap-10 categories sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
     >
       @for (category of categories; track category._id; let i = $index) {
-      <div
-        data-aos="fade-up"
-        [attr.data-aos-delay]="i * 100"
-        data-aos-duration="800"
-        data-aos-once="true"
-      >
+      <div>
         <div
           [routerLink]="['/category', category._id]"
           class="category-item relative h-[300px] rounded-4xl cursor-pointer p-2"
@@ -34,7 +29,7 @@
             alt="category.name"
             class="w-full object-contain md:object-cover h-[250px] rounded-t-4xl"
           />
-          <h2 class="text-center pt-2 text-main text-[20px]" data-aos="fade-in">
+          <h2 class="text-center pt-2 text-main text-[20px]">
             {{ category.name }}
           </h2>
         </div>
